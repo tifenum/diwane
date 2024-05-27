@@ -48,6 +48,3 @@ flicker:
       com:
         fasterxml:
           jackson: DEBUG
-sendgrid:
-  api:
-    key: 
