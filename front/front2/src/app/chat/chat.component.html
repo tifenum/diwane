@@ -1,0 +1,58 @@
+<!-- Liens vers les CSS externes -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link href="https://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<div class="container-fluid bg-primary px-5 d-none d-lg-block">
+  <div class="row gx-0">
+      <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+          <!-- Vous pouvez conserver cette partie si nécessaire -->
+      </div>
+      <div class="col-lg-4 text-center text-lg-end">
+          <div class="d-inline-flex align-items-center" style="height: 45px;">
+             <!-- Lien de déconnexion -->
+              <a class="dropdown-item" href="#" *ngIf="(tokenService.isLoggedIn())" (click)="logout()"><i class="bi bi-box-arrow-right"></i>Déconnexion</a>
+             <!-- Lien de retour -->
+             <a class="text-light" routerLink="/admin"><i class="fas fa-arrow-left me-1"></i>retour</a>
+
+          </div>
+        </div>
+  </div>
+<div class="container mt-5">
+
+    <h2 class="mb-4 text-center">Gestion des Questions Prédéfinies</h2>
+
+
+  <div class="card shadow">
+    <div class="card-body">
+      <form (ngSubmit)="addOrUpdateQuestion()">
+        <div class="mb-3">
+          <label for="questionText" class="form-label">Question</label>
+          <input type="text" class="form-control" id="questionText" [(ngModel)]="newQuestion.text" name="text" required>
+        </div>
+        <div class="mb-3">
+          <label for="questionAnswer" class="form-label">Réponse</label>
+          <textarea class="form-control" id="questionAnswer" rows="3" [(ngModel)]="newQuestion.answer" name="answer" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-custom">{{ editIndex !== null ? 'Mettre à jour' : 'Ajouter' }}</button>
+<button type="button" class="btn btn-secondary btn-custom" (click)="resetForm()">Annuler</button>
+
+      </form>
+    </div>
+  </div>
+  
+  <div class="list-group mt-4">
+    <a href="#" class="list-group-item list-group-item-action" *ngFor="let question of questions; let i = index" aria-current="true">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ question.text }}</h5>
+        <small class="text-muted">Cliquer pour modifier ou supprimer</small>
+      </div>
+      <p class="mb-1">{{ question.answer }}</p>
+      <div class="btn-group mt-2">
+        <button class="btn btn-warning btn-sm" (click)="editQuestion(i)">Modifier</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteQuestion(i)">Supprimer</button>
+      </div>
+    </a>
+  </div>
+</div>

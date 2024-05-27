@@ -1,0 +1,686 @@
+
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+
+<div class="container-fluid bg-primary px-5 d-none d-lg-block">
+    <div class="row gx-0">
+        <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+            <div class="d-inline-flex align-items-center" style="height: 45px;">
+               
+                    <div class="d-inline-flex align-items-center" style="height: 45px;">
+
+                <a class="btn btn-square btn-secondary rounded-circle mx-1"
+                    href="https://www.facebook.com/douane.tunisie/"><i class="fa fa-facebook-f"></i></a>
+                <a class="btn btn-square btn-primary rounded-circle mx-1"
+                    href="https://twitter.com/i/flow/login?redirect_after_login=%2FDouaneTunisie"><i
+                        class="fa fa-twitter"></i></a>
+                <a class="btn btn-square btn-primary rounded-circle mx-1"
+                    href="https://www.youtube.com/channel/UCnaeFNIErTt_coPSykdnCWg/featured"><i
+                        class="fa fa-youtube"></i></a>
+
+            </div>
+                </div>
+        </div>
+        <div class="col-lg-4 text-center text-lg-end">
+                 <div class="d-inline-flex align-items-center" style="height: 45px;">
+               <!-- Lien Register modifié pour ouvrir la modale -->
+               <a class=" text-light  btn btn-primary"  *ngIf="(tokenStorage.isLoggedIn())" (click)="logout()"><small><i class="bi bi-box-arrow-right"></i>Déconnexion</small></a>
+
+                <a href="#"><small class="me-3 text-light"class="btn btn-primary" data-bs-toggle="modal" *ngIf="!(tokenStorage.isLoggedIn())" data-bs-target="#loginModal" ><i class="fa fa-sign-in-alt me-2"></i>se connecter</small></a>
+              
+               <a href="#" class="me-3 text-light btn btn-primary" data-bs-toggle="modal" *ngIf="!(tokenStorage.isLoggedIn())" data-bs-target="#registerModal" ><small><i class="fa fa-user me-2"></i>S'inscrire</small></a>
+
+               
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
+<!-- Fenêtre modale d'inscription améliorée -->
+<div class="modal fade"  id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"  aria-hidden="true">
+    <div class="modal-dialog"   >
+      <div class="modal-content" >
+        <div class="modal-header">
+          <h5 class="modal-title" id="registerModalLabel">Enregistrement</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="registerForm" >
+            <div class="mb-3">
+              <div class="input-group">
+                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                <input type="text" class="form-control" id="firstname" placeholder="Prénom"
+                formControlName="firstname" name="firstname" required >
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="input-group">
+                <span class="input-group-text"><i class="fa fa-user-tag"></i></span>
+                <input type="text" class="form-control" id="lastname" placeholder="Nom"
+                formControlName="lastname" name="lastname" required >
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="input-group">
+                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                <input type="email" class="form-control" id="email" placeholder="Email"
+                formControlName="email" name="email" required >
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="input-group">
+                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control" id="password" placeholder="Mot de passe"
+                formControlName="password" name="password" required minlength="8" >
+              </div>
+            </div>
+            <div class="d-grid gap-2">
+              <button  type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-target="#loginModal" data-bs-toggle="modal" (click)="register()">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Navbar & Hero Start -->
+<div class="container-fluid position-relative p-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-4 px-lg-5 py-3 py-lg-0">
+        <a href="#" class="navbar-brand p-0">
+            <img src="assets/img/logo.png" alt="Logo" width="100" height="40">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+
+                <!-- Les liens sont maintenant conditionnés par l'état de connexion -->
+
+                <a class="nav-item nav-link"*ngIf="authService.isUserLoggedIn()" [routerLink]="['/particulier']">Services</a>
+                <a class="nav-item nav-link" *ngIf="authService.isUserLoggedIn()" [routerLink]="['/compte']">Compte</a>
+                <a class="nav-item nav-link" *ngIf="authService.isUserLoggedIn()"[routerLink]="['/contact']">Contact</a>
+            </div>
+        </div>
+        <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Auto-Service</a>
+        <img src="assets/img/drapo.png" alt="Drapeau Tunisien" width="50" height="60">
+    </nav>
+</div>
+
+        
+        
+            
+       
+        
+    <!-- Carousel Start -->
+    <div class="carousel-header">
+        <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#carouselId" data-bs-slide-to="1"></li>
+                <li data-bs-target="#carouselId" data-bs-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                    <img src="assets/img/home1.jpg" class="img-fluid" alt="Image" style="width:100%; height: auto;">
+                    <div class="carousel-caption">
+                        <div class="p-3" style="max-width: 900px;">
+                           
+                           
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/img/home1.jpg" class="img-fluid" alt="Image" style="width: 100%; height: auto;">
+                    <div class="carousel-caption">
+                        <div class="p-3" style="max-width: 900px;">
+<!--                            
+                            <h1 class="display-2 text-capitalize text-white mb-4">bienvenue</h1>
+                            <p class="mb-5 fs-5">     Numerisez votre parcours douanier,simplifiez votre vie -NSID  
+                            </p>
+                            -->
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/img/home2.jpg" class="img-fluid" alt="Image" style="width: 100%; height: auto;">
+                    <div class="carousel-caption">
+                        <div class="p-3" style="max-width: 900px;">
+<!--                            
+                            <h1 class="display-2 text-capitalize text-white mb-4">bienvenue</h1>
+                            <p class="mb-5 fs-5">     Numerisez votre parcours douanier,simplifiez votre vie -NSID  
+                            </p> -->
+                           
+                        </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon btn bg-primary" aria-hidden="false"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                <span class="carousel-control-next-icon btn bg-primary" aria-hidden="false"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    </div>
+    <!-- Carousel End -->
+
+
+       
+<!-- Navbar & Hero End -->
+
+<!-- About Start -->
+<div class="container-fluid about py-5">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-5">
+                <div class="h-100" style="border: 50px solid; border-color: transparent #13357B transparent #13357B;">
+                    <img src="assets/img/dd1.jfif" class="img-fluid w-100 h-100" alt="">
+                </div>
+            </div>
+            <div class="col-lg-7" style="background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(img/about-img-1.png);">
+                <h5 class="section-about-title pe-3">À propos de nous</h5>
+                <h1 class="mb-4">Bienvenue <span class="text-primary"></span></h1>
+                <p class="mb-4">Suite au communiqué du 30 décembre 2022 relatif à la mise en exploitation du service en ligne «Transaction électronique», la Direction Générale des Douanes informe le public que l’application est accessible en cliquant sur le présent communiqué.</p>
+                <p class="mb-4">Elle rappelle également à tous les usagers qu’ils peuvent désormais déposer et suivre leurs demandes de transaction par le biais dudit dispositif par eux-mêmes ou par l’intermédiaire de leur mandataire, qu’il soit avocat ou toute autre personne ayant obtenu une procuration légale. Accusantium quos voluptatem suscipit neque enim, doloribus ipsum rem eos distinctio, dignissimos nisi saepe nulla? Libero numquam perferendis provident placeat molestiae quia?</p>
+                
+                
+                <p class="mb-4"> En conséquence, la Direction Générale des Douanes porte à la connaissance des usagers qu’elle cessera définitivement d’accepter les demandes de transaction sur support papier dans tous ses services centraux et régionaux, à compter du lundi 02 janvier 2023.Le nouveau service permet de recevoir des offres de transaction à distance via l’adresse électronique insérée par l’usager ou son mandataire lors du remplissage du formulaire en ligne.</p>
+                <p class="mb-4">En conclusion, et affin de faciliter la mise en exploitation de ces mesures nouvelles en matière de dépôt et de suivi des demandes de transaction, la Direction Générale des Douanes compte sur la compréhension de ses usagers et leur implication dans la réussite du processus de la numérisation des services.</p>
+                <div class="row gy-2 gx-4 mb-4">
+                    <div class="col-sm-6">
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Handpicked Hotels</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>5 Star Accommodations</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Latest Model Vehicles</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>150 Premium City Tours</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>24/7 Service</p>
+                    </div>
+                </div>
+                <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="">Read More</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+<!-- Services Start -->
+<div class="mx-auto text-center mb-5" style="max-width: 900px;">
+    <h5 class="section-title px-3">Services</h5>
+    <h1 class="mb-0">Votre Services</h1>
+</div>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                    <div class="service-content text-end">
+                        <h5 class="mb-4">permis de circulation d'un véhicule immatriculé à l'étranger</h5>
+                        <p class="mb-0">Autorisation de circulation octroyée à un véhicule immatriculé à l'étranger, permettant sa légalité sur les routes locales.
+                        </p>
+                    </div>
+                    <div class="service-icon p-4">
+                        <i class="fa fa-car fa-4x text-primary"></i>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="service-content-inner d-flex align-items-center  bg-white border border-primary rounded p-4 pe-0">
+                    <div class="service-content text-end">
+                        <h5 class="mb-4">Permis de circulation d'un véhicule immatriculé dans la serie minéralogique tunisienne "RS" (Permis bleu)</h5>
+                        <p class="mb-0">AUne autorisation légale est délivrée pour permettre la circulation d'un véhicule immatriculé avec la série minéralogique tunisienne "RS", communément désignée comme le "Permis bleu"
+                        </p>
+                    </div>
+                    <div class="service-icon p-4">
+                        <i class="fa fa-car fa-4x text-primary"></i>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
+                    <div class="service-icon p-4">
+                        <i class="fa fa-car fa-4x text-primary"></i>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h5 class="mb-4">Autorisation pour la réexportation d'un véhicule bénéficiant du régime FCR</h5>
+                        <p class="mb-0">Autorisation officielle de réexportation accordée à un véhicule bénéficiant du régime FCR.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 ps-0">
+                    <div class="service-icon p-4">
+                        <i class="fa fa-car fa-4x text-primary"></i>
+                    </div>
+                    
+                    <div class="service-content">
+                        <h5 class="mb-4">Autorisation de conduire un véhicule immatriculé dans la serie minéralogique tunisienne "RS:</h5>
+                        <p class="mb-0">Autorisation de conduire un véhicule arborant la série minéralogique tunisienne "RS", attestant du droit de circuler légalement sur les routes du territoire tunisien.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+           
+        </div>
+    </div>
+<!-- Destination Start -->
+
+                               
+                                    <div class="destination-img">
+                                        <img class="img-fluid rounded w-100" src="assets/img/home.png" alt="">
+                                        <div class="destination-overlay p-4">
+                                            
+                                           
+                                            
+                                        </div>
+                                       <!-- Destination End -->
+
+
+
+
+
+<!-- Gallery Start -->
+<div class="container-fluid gallery py-5 my-5">
+    <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+        <h5 class="section-title px-3">Rapports</h5>
+        <h1 class="mb-4">Douane tunisienne sur votre service.</h1>
+      
+    </div>
+ 
+        <div class="tab-content">
+            <div id="GalleryTab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-2">
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/d1.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane<i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/d2.jpg" data-lightbox="gallery-1" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/d3.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane <i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/d4.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/d5.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane<i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="img/gallery-3.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/d6.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/d7.jpg" data-lightbox="gallery-4" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/d8.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane <i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/d8.jpg" data-lightbox="gallery-5" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/home.png" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane <i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/home.png" data-lightbox="gallery-6" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/a11.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane <i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/d10.jpg" data-lightbox="gallery-7" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/ds1.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane <i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/a13.jpg" data-lightbox="gallery-8" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/a13.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane <i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/hhh.jpg" data-lightbox="gallery-9" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-3 col-xl-2">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/a12.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane <i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/a13.jpg" data-lightbox="gallery-10" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="GalleryTab-2" class="tab-pane fade show p-0">
+                <div class="row g-2">
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/a13.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane <i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/a14.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/a14.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane <i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/a14.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="GalleryTab-3" class="tab-pane fade show p-0">
+                <div class="row g-2">
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/a14.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane<i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/a14.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/a14.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane<i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/a14.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="GalleryTab-4" class="tab-pane fade show p-0">
+                <div class="row g-2">
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/a14.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane<i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/a14.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/a14.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane<i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/a14.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="GalleryTab-5" class="tab-pane fade show p-0">
+                <div class="row g-2">
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/a14.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">View All Place <i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/a14.jpg" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
+                        <div class="gallery-item h-100">
+                            <img src="assets/img/a14.jpg" class="img-fluid w-100 h-100 rounded" alt="Image">
+                            <div class="gallery-content">
+                                <div class="gallery-info">
+                                    <h5 class="text-white text-uppercase mb-2">World Tour</h5>
+                                    <a href="#" class="btn-hover text-white">douane<i class="fa fa-arrow-right ms-2"></i></a>
+                                </div>
+                            </div>
+                            <div class="gallery-plus-icon">
+                                <a href="assets/img/a14.jpg" data-lightbox="gallery-3" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Gallery End --><!-- Login Modal -->
+
+
+<div class="modal fade "  id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"  aria-hidden="true">
+    <div class="modal-dialog"  >
+      <div class="modal-content"  >
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+        </div>
+        <div class="modal-body">
+       
+     <form [formGroup]="formLogin"   >
+            <div class="mb-3">
+              <label for="modalLoginEmail" class="form-label">Email</label>
+              <input  type="email" class="form-control" formControlName="email" id="modalLoginEmail"     >
+             <!--  <div *ngIf="emailInput.errors && (emailInput.dirty || emailInput.touched)" class="text-danger">
+                <div *ngIf="emailInput.errors['required']">L'email est requis.</div>
+                <div *ngIf="emailInput.errors['email']">L'email doit être une adresse email valide.</div>
+              </div> -->
+            </div>
+            <div class="mb-3">
+              <label for="modalLoginPassword" class="form-label">Mot de passe</label>
+              <input  type="password" class="form-control" formControlName="password"  id="modalLoginPassword"   >
+         <!--   <div *ngIf="passwordInput.errors && (passwordInput.dirty || passwordInput.touched)" class="text-danger">
+                <div *ngIf="passwordInput.errors['required']">Le mot de passe est requis.</div>
+                <div *ngIf="passwordInput.errors['minlength']">Le mot de passe doit comporter au moins 6 caractères.</div>
+              </div> -->
+            </div>
+            <div class="mb-3 text-center">
+              <button type="button" class="btn btn-primary" (click)="login()"data-bs-dismiss="modal" >Connecter</button>
+            </div>
+          </form>
+          <p class="text-center mb-1">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Mot de passe oublié?</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!-- Forgot Password Modal -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h5 class="modal-title" id="forgotPasswordModalLabel">Réinitialisation du mot de passe</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form >
+                    <div class="mb-3">
+                        <label for="resetEmail" class="form-label">Adresse e-mail</label>
+                        <input type="email" class="form-control" name="resetEmail" required placeholder="Entrez votre adresse e-mail">
+                    </div>
+                    <div class="mb-3 text-center">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target=" #newPasswordModal" (click)="sendResetPasswordRequest()">Envoyer le code de vérification</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- New Password Modal -->
+<div class="modal fade" id="newPasswordModal" tabindex="-1" aria-labelledby="newPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newPasswordModalLabel">Nouveau mot de passe</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="updatePassword()">
+            <div class="mb-3">
+              <label for="newPassword" class="form-label">Nouveau mot de passe</label>
+              <input type="password" class="form-control"  name="newPassword" required>
+            </div>
+            <div class="mb-3">
+              <label for="code" class="form-label">Code envoyé par email</label>
+              <input type="text" class="form-control" name="code" required>
+            </div>
+            <div class="mb-3 text-center">
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  

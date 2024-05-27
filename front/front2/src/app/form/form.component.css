@@ -1,0 +1,98 @@
+
+body {
+    margin: 0; /* Supprime les marges par défaut */
+    padding: 0; /* Supprime les espaces autour du contenu */
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+}
+.navbar {
+    background-color: royalblue; /* Définit la couleur de fond de la navbar en bleu */
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5); /* Définit une ombre portée avec une longueur automatique */
+}
+
+
+
+
+.textBlur {
+    color: transparent;
+    text-shadow: 0 0 1px white;
+}
+ 
+.bg-primary {
+    background-color: #f9ffee !important;
+}
+.display-4 {
+    font-size: calc(1.475rem + 2.7vw) !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+    color: white !important;
+}
+.navbar {
+    box-shadow: none;
+}
+
+a:hover {
+    color: yellowgreen !important;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block !important;
+    margin-top: 0;
+
+}
+
+
+/* Ajoutez ceci à votre fichier CSS */
+.navbar-nav .nav-link {
+    color: white !important; /* Définit la couleur du texte des liens de la navbar en blanc */
+}
+
+.navbar-nav .nav-link .fa {
+    color: white !important; /* Définit la couleur de l'icône utilisateur en blanc */
+}
+
+.img-fluid {
+    height: 200px !important;
+    width: 100% !important;
+    margin-top: 0% !important;
+}
+.featurs .featurs-item .featurs-icon {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}.bg-light {
+    background-color: #f4f6f8 !important;
+}
+
+.featurs .featurs-item .featurs-icon::after {
+    content: "";
+    width: 35px;
+    height: 35px;
+    background: var(--bs-secondary);
+    position: absolute;
+    bottom: -10px;
+    transform: translate(-50%);
+    transform: rotate(45deg);
+    background: var(--bs-secondary);
+    
+}
+.text-primary {
+    color: #81c408 !important;
+}
+.px-3 {
+    padding-right: 1rem !important;
+    padding-left: 1rem !important;
+}
+
+
+
+
+
+
+/* login */
+img {
+    margin: 0 auto;
+    display: block;
+    margin-top: 20%;
+  }
+ 
+

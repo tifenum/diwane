@@ -1,0 +1,270 @@
+<div class="container-fluid bg-primary px-5 d-none d-lg-block">
+  <div class="row gx-0">
+      <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+          <div class="d-inline-flex align-items-center" style="height: 45px;">
+
+              <a class="btn btn-square btn-secondary rounded-circle mx-1"
+                  href="https://www.facebook.com/douane.tunisie/"><i class="fa fa-facebook-f"></i></a>
+              <a class="btn btn-square btn-primary rounded-circle mx-1"
+                  href="https://twitter.com/i/flow/login?redirect_after_login=%2FDouaneTunisie"><i
+                      class="fa fa-twitter"></i></a>
+              <a class="btn btn-square btn-primary rounded-circle mx-1"
+                  href="https://www.youtube.com/channel/UCnaeFNIErTt_coPSykdnCWg/featured"><i
+                      class="fa fa-youtube"></i></a>
+
+          </div>
+      </div>
+      <div class="col-lg-4 text-center text-lg-end">
+
+          <div class="d-inline-flex align-items-center" style="height: 45px;">
+              <!-- Lien Register modifié pour ouvrir la modale -->
+              
+              <div ngbDropdown class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" ngbDropdownToggle>
+                      My Dashboard
+                  </button>
+                  <ul ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-bell me-2"></i> Notifications</a></li>
+                    <li><a class="dropdown-item" href="#" *ngIf="(tokenService.isLoggedIn())" (click)="logout()"><i class="bi bi-box-arrow-right"></i> Deconnexion</a></li>
+                  </ul>
+                </div>
+
+          </div>
+
+      </div>
+  </div>
+</div>
+<div class="container-fluid position-relative p-0">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light px-4 px-lg-5 py-3 py-lg-0">
+      <a href="#" class="navbar-brand p-0">
+          <img src="assets/img/logo.png" alt="Logo" width="50" height="40">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav ms-auto py-0">
+              <a class="nav-item nav-link" [routerLink]="['/particulier']">Services</a>
+              <a class="nav-item nav-link" [routerLink]="['/compte']">Compte</a>
+              <a class="nav-item nav-link" [routerLink]="['/contact']">Contact</a>
+          </div>
+      </div>
+      <a href="#" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Auto-Service</a>
+      <img src="assets/img/drapo.png" alt="Drapeau Tunisien" width="50" height="60">
+  </nav>
+</div>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+  <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+          <div class="panel panel-white profile-widget">
+              <div class="row">
+                  <div class="col-sm-12">
+                      <div class="image-container bg2" style="background:url(assets/img/1.png)">
+                          <img src="assets/img/2.jpg" class="avatar" alt="avatar">
+                      </div>
+                  </div>
+                  <div class="col-sm-12" *ngIf="user">
+                      <div class="details">
+                          <h4>
+                              <h4>{{user.firstname}} {{user.lastname}}</h4>
+                              <p>Email: {{user.email}}</p> <i class="fa fa-sheild"></i>
+                          </h4>
+                          <div> votre espace privé</div>
+                          <div></div>
+                          <div></div>
+                          <div class="mg-top-10">
+                              <a (click)="getUserProfile()" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                                  Modifier votre profil
+                              </a>
+
+                              <a href="#" class="btn btn-default"  [routerLink]="[ '/myform']">modification d'autorisation</a>
+                              <a href="#" class="btn btn-default" (click)="checkStatus(1)">voir les reponces</a>
+
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+
+          <div class="row">
+
+              <div class="col-sm-12" *ngIf="user" >
+                  <div class="panel panel-white post">
+                      <div class="post-heading">
+                          
+                      </div>
+                      <div class="chat-box">
+                          <div class="chat-header">
+                              <div class="pull-left image">
+                                  <img src="assets/img/2.jpg" class="img-circle avatar" alt="user profile image">
+                              </div>
+                              <div class="pull-left meta">
+                                  <div class="title h5">
+                                      <a href="#"><b>{{ user.firstname }} {{ user.lastname }}</b></a>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="chat-content">
+                              <div *ngIf="selectedQuestion" class="response alert alert-danger">
+                                  Réponse: {{ selectedQuestion.answer }}
+                              </div>
+                              <ul class="list-unstyled">
+                                  <li *ngFor="let question of questions" (click)="selectQuestion(question)" class="chat-message">
+                                      {{ question.text }}
+                                  </li>
+                              </ul>
+                              <form (submit)="submitQuestion()">
+                                  <div class="form-group">
+                                      <input type="text" class="form-control" placeholder="Vous pouvez ajouter votre question et l'admin lui répondre" [(ngModel)]="userQuestion" name="userQuestion">
+                                  </div>
+                                  <button type="submit" class="btn btn-primary">Envoyer</button>
+                              </form>
+                          </div>
+                      </div>
+                      
+                        
+                        
+                      
+                      <div class="post-description">
+
+                          <p>réponse instantanée</p>
+
+                      </div>
+                  </div>
+                  <div class="row">
+
+                      <div class="col-sm-12">
+                          <div class="panel panel-white post">
+                              <div class="post-heading">
+                                  <div class="pull-left image">
+                                      <img src="assets/img/2.jpg" class="img-circle avatar" alt="user profile image">
+                                  </div>
+                                  <div class="pull-left meta">
+                                      <div class="title h5">
+                                          <a href="#"><b>{{user.firstname}} {{user.lastname}}</b></a>
+
+                                      </div>
+
+                                  </div>
+                              </div>
+                              <div class="post-image">
+                                  <img src=""><img src="assets/img/compte1.jpg" class="image" alt="image post">
+                              </div>
+                              <div class="post-description">
+
+                                  <p>modification de service </p>
+
+                              </div>
+                          </div>
+                          <div class="row">
+
+                              <div class="col-sm-12">
+                                  <div class="panel panel-white post">
+                                      <div class="post-heading">
+                                          <div class="pull-left image">
+                                              <img src="assets/img/2.jpg" class="img-circle avatar"
+                                                  alt="user profile image">
+                                          </div>
+                                          <div class="pull-left meta">
+                                              <div class="title h5">
+                                                  <a href="#"><b>
+                                                          <h4>{{ user.firstname }} {{ user.lastname }}</h4>
+
+                                                      </b></a>
+
+                                              </div>
+
+                                          </div>
+                                      </div>
+                                      <div class="post-image">
+                                          <img src=""><img src="assets/img/compte.jpg" class="image" alt="image post">
+                                      </div>
+                                      <div class="post-description">
+
+                                          <p>video explicative </p>
+
+                                      </div>
+                                  </div>
+
+
+                                  <div class="modal fade" id="editProfileModal" tabindex="-1"
+                                      aria-labelledby="editProfileModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog modal-lg">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                      aria-label="Close"></button>
+                                              </div>
+                                              <div class="container bootstrap snippets bootdey">
+                                                  <h1 class="text-primary">Modifier Profil</h1>
+                                                  <hr>
+                                                  <div class="row">
+                                                      <!-- left column -->
+                                                      <div class="col-md-3">
+                                                          <div class="text-center">
+                                                              <img src="assets/img/2.jpg" 
+                                                                  class="avatar img-circle img-thumbnail"
+                                                                  alt="avatar">
+                                                              
+
+                                                              <input type="file" class="form-control">
+                                                          </div>
+                                                      </div>
+
+                                                      <!-- edit form column -->
+                                                      <div class="col-md-9 personal-info">
+                                                          <div class="alert alert-info alert-dismissable">
+                                                              <a class="panel-close close" data-dismiss="alert">×</a>
+                                                              <i class="fa fa-coffee"></i>
+                                                              <strong>.alert</strong> changer votre profil
+                                                          </div>
+                                                          <h3>information personelle</h3>
+
+                                                          <form class="form-horizontal" role="form"
+                                                              [formGroup]="update">
+                                                              <div class="form-group">
+                                                                  <label for="firstname"
+                                                                      class="form-label">Prénom</label>
+
+                                                                  <div class="col-lg-8">
+                                                                      <input type="text" class="form-control"
+                                                                          id="firstname" formControlName="firstname">
+                                                                  </div>
+                                                              </div>
+                                                              <div class="form-group">
+                                                                  <label for="lastName" class="form-label">Nom</label>
+                                                                  <div class="col-lg-8">
+                                                                      <input type="text" class="form-control"
+                                                                          id="lastName" formControlName="lastname">
+                                                                  </div>
+                                                              </div>
+
+                                                             
+                                                              <div class="form-group">
+                                                                  <label for="password" class="form-label">Mot de
+                                                                      passe (laisser vide pour ne pas changer)</label>
+                                                                  <div class="col-lg-8">
+                                                                      <input type="password" class="form-control"
+                                                                          id="password" formControlName="password">
+
+
+                                                                  </div>
+                                                              </div>
+                                                          </form>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <hr>
+                                              <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary"
+                                                      data-bs-dismiss="modal">Fermer</button>
+                                                  <button type="button" class="btn btn-primary"
+                                                      (click)="updateProfile()">Sauvegarder les changements</button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>

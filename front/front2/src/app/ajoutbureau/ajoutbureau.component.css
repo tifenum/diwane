@@ -1,0 +1,185 @@
+.animated-text {
+    color: yellow; /* Couleur du texte en jaune */
+    animation: changeColor 2s infinite alternate; /* Animation de changement de couleur */
+}
+/* src/app/components/create-bureau/create-bureau.component.css */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+button {
+  width: 100px;
+}
+
+@keyframes changeColor {
+    0% {
+        color: rgb(161, 118, 9); /* Début de l'animation : jaune */
+    }
+    100% {
+        color: rgb(138, 150, 202); /* Fin de l'animation : blanc (ou une autre couleur de votre choix) */
+    }
+}
+@keyframes moveText {
+    0% { transform: translateX(0); } /* Position de départ */
+    50% { transform: translateX(20px); } /* Position intermédiaire */
+    100% { transform: translateX(0); } /* Position finale, revient à la position de départ */
+}
+
+.animated-text {
+    animation: moveText 2s infinite; /* Applique l'animation avec une durée de 2 secondes, en boucle */
+}
+
+body{
+    margin-top:20px;
+    background:rgba(241,246,253);
+  }
+  .rounded-circle {
+    border-radius: 50%!important;
+  }
+  .border-5 {
+    border-width: 5px;
+  }
+  
+  .border-white {
+    border-opacity: 1;
+    border-color: rgba(255,255,255, 1) !important;
+  }
+  
+  .shadow {
+    box-shadow: 0 0.375rem 1.5rem 0 rgba(165, 175, 185, 0.125)!important;
+  }
+  
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .icon-sm {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 75%;
+    line-height: normal;
+  }
+  .rounded-circle {
+    border-radius: 50%!important;
+  }
+  
+  .hover-top-in .hover-top--in {
+    transition: ease-in-out all .35s;
+    position: relative;
+    top: 0
+  }
+  
+  .hover-top-in:hover .hover-top--in {
+    top: -10px
+  }
+  
+  .me-1 {
+    margin-right: 0.25rem!important;
+  }
+  
+  .fw-700 {
+    font-weight: 700!important;
+  }
+  .mb-1 {
+    margin-bottom: 0.25rem!important;
+  }
+  
+  .z-index-1 {
+    z-index: 1!important;
+  }
+  
+  .pt-6 {
+    padding-top: 2.5rem!important;
+  }
+  .p-4 {
+    padding: 1.5rem!important;
+  }
+  .mt-n4 {
+    margin-top: -1.5rem!important;
+  }
+  
+  .shadow {
+    box-shadow: 0 0.375rem 1.5rem 0 rgba(var(--bs-gray-700-rgb),.125)!important;
+  }
+  .px-5 {
+    padding-right: 2rem!important;
+    padding-left: 2rem!important;
+  }
+  .position-relative {
+    position: relative!important;
+  }
+  .overflow-hidden {
+    overflow: hidden!important;
+  }
+  .jumbotron label {
+    font-size:12px;    
+  }
+  
+  .reg-icon{
+    color:#5bc0de;
+    font-weight:bold;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4) !important;
+  }
+  
+  .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+    color: #fff;
+    background-color: #5bc0de;
+  }
+  
+  .prj-name{
+    font-weight:bold;
+    color:#5bc0de;}
+    .box {
+      border: 2px solid black; /* Définit un cadre noir de 2px */
+      padding: 20px; /* Ajoute un peu d'espace autour du contenu à l'intérieur de la boîte */
+      background-color: #ffffff; /* Fond blanc pour la boîte */
+  }
+  
+  .carousel {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  
+  .carousel-container {
+    width: 100%;
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  
+  .carousel-item {
+    min-width: 20%;
+    transition: transform 0.5s ease;
+    text-align: center; 
+  }
+  
+  @keyframes rotate-carousel {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+  }
+  
+  .carousel-container:hover {
+    animation: rotate-carousel 10s infinite linear;
+  }
+  
+  
+  

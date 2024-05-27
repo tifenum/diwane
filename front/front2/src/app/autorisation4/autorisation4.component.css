@@ -1,0 +1,50 @@
+.text-danger {
+  color: #dc3545; /* Rouge d'erreur Bootstrap par défaut */
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+}
+.title-animation {
+  animation: fadeInDown 1s ease-in-out;
+}
+
+@keyframes fadeInDown {
+  0% {
+      opacity: 0;
+      transform: translateY(-50px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px; /* Espacement entre les lignes */
+}
+
+.form-column {
+  flex: 1;
+  padding: 0 15px; /* Espacement entre les colonnes */
+}
+input[type="file"]:hover {
+  background-color: #0f22ec; /* Change la couleur de fond lors du survol pour un effet interactif */
+}
+input[type="file"] {
+  color: rgb(17, 17, 240); /* Change la couleur du texte à bleu */
+  border: 2px solid rgb(235, 235, 239); /* Ajoute une bordure bleue */
+  background-color: #ebeaf0; /* Met un fond légèrement bleuté pour un effet plus doux */
+  padding: 5px; /* Ajoute un peu de padding pour mieux visualiser le champ */
+  border-radius: 5px; /* Arrondit les bords pour un style plus doux */
+}
+@media (min-width: 992px) {
+  .align-lg-start {
+    align-items: start !important;
+    justify-content: flex-start !important;
+  }
+
+  .align-lg-end {
+    align-items: end !important;
+    justify-content: flex-end !important;
+  }
+}

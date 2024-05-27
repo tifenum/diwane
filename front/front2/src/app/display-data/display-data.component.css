@@ -1,0 +1,51 @@
+/* Appliquez un style général à la page */
+.data-container {
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }
+  
+  /* Style pour les titres des sections */
+  h1, h2 {
+    text-align: center;
+    color: #000;
+  }
+  
+  /* Style pour les sections d'informations */
+  .information-section {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #000;
+  }
+  
+  /* Style pour les paragraphes à l'intérieur des sections */
+  .information-section p {
+    font-size: 14px;
+    line-height: 1.6;
+  } 
+  .qr-code-container {
+    text-align: center;
+    margin-top: 50px; /* Ajustez la marge pour centrer verticalement */
+  }
+  .center-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Espacement entre le code QR et le bouton */
+  }
+  
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  
+  

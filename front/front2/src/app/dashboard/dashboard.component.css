@@ -1,0 +1,30 @@
+.container {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .col-md-6 {
+    flex: 1 1 48%; /* Ajustez la taille des colonnes à 48% pour un espace entre les deux graphiques */
+    margin-bottom: 20px; /* Ajoutez un espace entre les rangées */
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  p {
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+  

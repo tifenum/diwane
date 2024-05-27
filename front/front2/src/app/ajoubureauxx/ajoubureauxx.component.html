@@ -1,0 +1,21 @@
+<!-- src/app/components/create-bureau/create-bureau.component.html -->
+<div>
+    <h2>Create Bureau</h2>
+    <form (ngSubmit)="createBureau()">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" [(ngModel)]="bureauDto.name" name="name" required>
+      </div>
+  
+      <div>
+        <label for="taches">Taches:</label>
+        <div *ngFor="let tache of tachesList">
+          <input type="checkbox" [value]="tache" (change)="toggleTache($event)">
+          {{ tache }}
+        </div>
+      </div>
+  
+      <button type="submit">Create Bureau</button>
+    </form>
+  </div>
+  

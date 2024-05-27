@@ -1,0 +1,900 @@
+<div class="container-fluid bg-primary px-5 d-none d-lg-block">
+    <div class="row gx-0">
+      <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+        <div class="d-inline-flex align-items-center" style="height: 45px">
+          <a
+            class="btn btn-square btn-primary rounded-circle mx-1"
+            href="https://www.facebook.com/douane.tunisie/"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a
+            class="btn btn-square btn-primary rounded-circle mx-1"
+            href="https://twitter.com/i/flow/login?redirect_after_login=%2FDouaneTunisie"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a
+            class="btn btn-square btn-primary rounded-circle mx-1"
+            href="https://www.youtube.com/channel/UCnaeFNIErTt_coPSykdnCWg/featured"
+            ><i class="fab fa-youtube"></i
+          ></a>
+        </div>
+      </div>
+      <div class="col-lg-4 text-center text-lg-end">
+        <a
+          class="me-3 text-light"
+          data-bs-toggle="modal"
+          data-bs-target="#loginModal"
+          [routerLink]="[ '/myform']"
+          ><small><i class="fa fa-sign-in-alt me-2"></i>Mes formulaires</small></a
+        >
+  
+        <a
+          class="me-3 text-light"
+          data-bs-toggle="modal"
+          data-bs-target="#loginModal"
+          ><small><i class="fa fa-sign-in-alt me-2"></i>Login</small></a
+        >
+        <a
+          class="me-3 text-light"
+          data-bs-toggle="modal"
+          data-bs-target="#registerModal"
+          ><small><i class="fa fa-user me-2"></i>Register</small></a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="container border border-dark p-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <img
+            src="assets/img/drapo.png"
+            alt="Premier logo"
+            class="logo"
+            style="max-width: 100px; height: auto"
+          />
+        </div>
+        <div class="col-6 text-right">
+          <img
+            src="assets/img/lod.png"
+            alt="Deuxième logo"
+            class="logo"
+            style="max-width: 100px; height: auto"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-center mt-5 fw-bold text-uppercase title-animation">
+            Autorisation pour la réexportation d'un véhicule bénéficiant du régime
+            FCR
+          </h1>
+        </div>
+      </div>
+    </div>
+  
+    <form [formGroup]="rsForm" (ngSubmit)="onSubmit()" class="container mt-5">
+      <div class="mb-3">
+        <!-- Première ligne de champs -->
+      </div>
+  
+      <div class="row">
+        <div class="col">
+          <label for="codeDemande" class="form-label"
+            >CIN /Numéro Passport :</label
+          >
+          <input
+            id="codeDemande"
+            formControlName="codeDemande"
+            type="text"
+            class="form-control"
+            pattern=".{9}"
+            title="Veuillez entrer votre numéro de CIN"
+            [title]="getPlaceholder3()"
+          />
+          <div
+            *ngIf="rsForm.get('codeDemande')?.errors?.['required'] && rsForm.get('codeDemande')?.touched"
+            class="text-danger"
+          >
+            Ce champ est obligatoire.
+          </div>
+  
+          <div
+            *ngIf="rsForm.get('codeDemande')?.errors?.['pattern'] && rsForm.get('codeDemande')?.touched"
+            class="text-danger"
+          >
+            le CIN doit etre 8 chiffre
+          </div>
+        </div>
+  
+        <div class="col">
+          <label for="typeDemande" class="form-label">Type de demande</label>
+          <select
+            id="typeDemande"
+            formControlName="typeDemande"
+            class="form-select"
+            title="Veuillez sélectionner le type de votre demande."
+            [title]="getPlaceholder4()"
+          >
+            <option value="premierD">Première demande</option>
+            <option value="dRectification">
+              Demande de rectification de l'autorisation
+            </option>
+            <option value="dRenouvellement">
+              Demande de renouvellement d'autorisation
+            </option>
+            <option value="dArret">Demande d'arrêt de la décision</option>
+            <!-- Options de type de demande ici -->
+          </select>
+          <!-- Message d'erreur si le champ est requis et non rempli -->
+          <div
+            *ngIf="rsForm.get('typeDemande')?.errors?.['required'] && rsForm.get('typeDemande')?.touched"
+            class="text-danger"
+          >
+            Le choix du type de demande est obligatoire.
+          </div>
+  
+          <div *ngIf="rsForm.get('typeDemande')?.value === 'dArret'" class="mb-3">
+            <label for="motifArret">Motif d'arrêt :</label>
+            <select
+              id="motifArret"
+              formControlName="motifArret"
+              class="form-select"
+              title="Veuillez choisir un motif d'arrêt."
+              aria-describedby="motifArretError"
+            >
+              <option value="">Sélectionnez un motif</option>
+              <option value="expiration_delai">
+                Expiration du délai d'incessibilité
+              </option>
+              <option value="regul_paiement">
+                Situation régularisée suite paiement des droits et taxes exigibles
+              </option>
+              <option value="regul_destruction">
+                Situation régularisée suite destruction
+              </option>
+              <option value="deces_proprietaire">Décès du propriétaire</option>
+              <option value="decision_judiciaire">Décision judiciaire</option>
+            </select>
+            <div
+              *ngIf="
+                rsForm.get('motifArret')?.errors &&
+                rsForm.get('motifArret')?.touched
+              "
+              id="motifArretError"
+              class="text-danger"
+            >
+              <div *ngIf="rsForm.get('motifArret')?.errors?.['required']">
+                Le choix d'un motif d'arrêt est obligatoire.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for=" interdictionsEtRestrictions" class="form-label">
+          Interdictions Et Restrictions</label
+        >
+        <input
+          id="interdictionsEtRestrictions"
+          formControlName="interdictionsEtRestrictions"
+          type="text"
+          class="form-control"
+          [title]="getPlaceholder14()"
+        />
+        <div
+          *ngIf="rsForm.get('interdictionsRestrictions')?.errors?.['required'] && rsForm.get('interdictionsRestrictions')?.touched"
+          class="text-danger"
+        >
+          Ce champ est obligatoire.
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="expirationAt" class="form-label"
+          >Date d'expiration de la décision</label
+        >
+        <input
+          id="expirationAt"
+          formControlName="expirationAt"
+          type="date"
+          class="form-control"
+          [title]="getPlaceholder5()"
+        />
+        <div
+          *ngIf="rsForm.get('expirationAt')?.errors?.['required'] && rsForm.get('expirationAt')?.touched"
+          class="text-danger"
+        >
+          Ce champ est requis.
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="brRattachement">Bureau de douane de rattachement :</label>
+  
+          <select
+            id="brRattachement"
+            formControlName="brRattachement"
+            class="form-select"
+            title="Veuillez sélectionner le bureau."
+            [title]="getPlaceholder()"
+          >
+            <option value="TNBR01">
+              Bureau régional des douanes de Tunis Port - المكتب الجهوي للديوانة
+              بتونس الميناء
+            </option>
+            <option value="TNBR02">
+              Bureau régional des douanes de Bizerte - المكتب الجهوي للديوانة
+              ببنزرت
+            </option>
+            <option value="TNBR03">
+              Bureau régional des douanes de l'Ariana - المكتب الجهوي للديوانة
+              بأريانة
+            </option>
+            <option value="TNBR04">
+              Bureau régional des douanes de Zaghouan - المكتب الجهوي للديوانة
+              بزغوان
+            </option>
+            <option value="TNBR05">
+              Bureau régional des douanes de Kairouan - المكتب الجهوي للديوانة
+              بالقيروان
+            </option>
+            <option value="TNBR06">
+              Bureau régional des douanes de Mahdia - المكتب الجهوي للديوانة
+              بالمهدية
+            </option>
+            <option value="TNBR07">
+              Bureau régional des douanes de Ben Arous - المكتب الجهوي للديوانة
+              ببن عروس
+            </option>
+            <option value="TNBR08">
+              Bureau régional des douanes de Monastir - المكتب الجهوي للديوانة
+              بالمنستير
+            </option>
+            <option value="TNBR09">
+              Bureau régional des douanes de Sfax - المكتب الجهوي للديوانة بصفاقس
+            </option>
+            <option value="TNBR10">
+              Bureau régional des douanes de Sousse - المكتب الجهوي للديوانة بسوسة
+            </option>
+            <option value="TNBR11">
+              Bureau régional des douanes de Gabès - المكتب الجهوي للديوانة بقابس
+            </option>
+            <option value="TNBR12">
+              Bureau régional des douanes du Kef - المكتب الجهوي للديوانة بالكاف
+            </option>
+            <option value="TNBR13">
+              Bureau régional des douanes de Siliana - المكتب الجهوي للديوانة
+              بسليانة
+            </option>
+            <option value="TNBR14">
+              Bureau régional des douanes de Béja - المكتب الجهوي للديوانة بباجة
+            </option>
+            <option value="TNBR15">
+              Bureau régional des douanes de Gafsa - المكتب الجهوي للديوانة بقفصة
+            </option>
+            <option value="TNBR16">
+              Bureau régional des douanes de Sidi Bouzid - المكتب الجهوي للديوانة
+              بسيدي بوزيد
+            </option>
+            <option value="TNBR17">
+              Bureau régional des douanes de Nabeul - المكتب الجهوي للديوانة بنابل
+            </option>
+            <option value="TNBR18">
+              Bureau régional des douanes de Kasserine - المكتب الجهوي للديوانة
+              بالقصرين
+            </option>
+            <option value="TNBR19">
+              Bureau régional des douanes de Jendouba - المكتب الجهوي للديوانة
+              بجندوبة
+            </option>
+            <option value="TNBR20">
+              Bureau régional des douanes de Medenine - المكتب الجهوي للديوانة
+              بمدنين
+            </option>
+            <option value="TNBR21">
+              Bureau régional des douanes de Tataouine - المكتب الجهوي للديوانة
+              بتطاوين
+            </option>
+            <option value="TNBR22">
+              Bureau régional des douanes de Kébeli - المكتب الجهوي للديوانة بقبلي
+            </option>
+            <option value="TNBR23">
+              Bureau régional des douanes de la Manouba - المكتب الجهوي للديوانة
+              بمنوبة
+            </option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="brFrontalier">Bureau de douane frontalier :</label>
+          <select
+            id="brFrontalier"
+            formControlName="brFrontalier"
+            class="form-select"
+            title="Veuillez sélectionner le bureau."
+            [title]="getPlaceholder()"
+          >
+            <option value="TNBF01">
+              Bureau frontalier des douanes de l'aéroport Tunis Carthage
+            </option>
+            <option value="TNBF02">
+              Bureau frontalier des douanes de Goulette Sud
+            </option>
+            <option value="TNBF03">
+              Bureau frontalier des douanes de Bizerte Port
+            </option>
+            <option value="TNBF04">
+              Bureau frontalier des douanes de Sousse Port
+            </option>
+            <option value="TNBF05">
+              Bureau frontalier des douanes de Sfax Port
+            </option>
+            <option value="TNBF06">
+              Bureau frontalier des douanes de Gardimaou
+            </option>
+            <option value="TNBF07">
+              Bureau frontalier des douanes de Bizerte Raffinerie
+            </option>
+            <option value="TNBF08">
+              Bureau frontalier des opérations commerciales du port de Radès
+            </option>
+            <option value="TNBF09">
+              Bureau frontalier des douanes de Goulette Nord
+            </option>
+            <option value="TNBF10">
+              Bureau frontalier des douanes de l'aéroport de Sfax
+            </option>
+            <option value="TNBF11">
+              Bureau frontalier des douanes de l'aéroport de Skanès Monastir
+            </option>
+            <option value="TNBF12">
+              Bureau frontalier des douanes de Skhira
+            </option>
+            <option value="TNBF 13">
+              Bureau frontalier des douanes de Gabès Ghannouche
+            </option>
+            <option value="TNBF14">
+              Bureau frontalier des douanes de l'aéroport de Jerba
+            </option>
+            <option value="TNBF15">
+              Bureau frontalier des douanes de Melloula
+            </option>
+            <option value="TNBF16">
+              Bureau frontalier des douanes de Tabarka
+            </option>
+            <option value="TNBF17">
+              Bureau frontalier des douanes de Tozeur
+            </option>
+            <option value="TNBF18">
+              Bureau frontalier des douanes de Ben Gardane Ras Jédir
+            </option>
+            <option value="TNBF19">Bureau frontalier des douanes de Dhiba</option>
+            <option value="TNBF20">
+              Bureau frontalier des douanes de Hazoua
+            </option>
+            <option value="TNBF21">
+              Bureau frontalier des douanes de Tameghza
+            </option>
+            <option value="TNBF22">
+              Bureau frontalier des douanes de Bouchebka
+            </option>
+            <option value="TNBF23">
+              Bureau frontalier du contrôle des magasins et aires de dédouanement
+              et magasins et aires d'exportation de Radès Port
+            </option>
+            <option value="TNBF24">
+              Bureau frontalier des douanes de Haidra
+            </option>
+            <option value="TNBF25">
+              Bureau frontalier des douanes de Kalaat Senan
+            </option>
+            <option value="TNBF26">
+              Bureau frontalier des douanes de Skiet S.Youssef
+            </option>
+            <option value="TNBF27">
+              Bureau frontalier des douanes de Zarzis
+            </option>
+            <option value="TNBF28">
+              Bureau frontalier des douanes de Babouche
+            </option>
+            <option value="TNBF29">
+              Bureau frontalier des douanes de l'aéroport international Enfida
+            </option>
+            <option value="TNBF30">
+              Bureau frontalier des douanes du parc d'activités économiques de
+              Menzel Bourguiba
+            </option>
+            <option value="TNBF31">
+              Bureau frontalier des douanes du parc d'activités économiques de
+              Bizerte
+            </option>
+            <option value="TNBF32">
+              Bureau frontalier des douanes de Kélibia
+            </option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <div class="row"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-column">
+          <label for="certificatImmatriculation" class="form-label"
+            >Copie certificat d'immatriculation du véhicule (Carte grise)</label
+          >
+          <input
+            type="file"
+            formControlName="certificatImmatriculation"
+            id="certificatImmatriculation"
+            class="form-control"
+            accept="image/*"
+          />
+        </div>
+      </div>
+  
+      <div class="border p-4 mb-3">
+        <div>
+          <legend>Identification des marchandises :</legend>
+          <div class="row">
+            <div class="col">
+              <label for="numchassis">Numéro de châssis:</label>
+              <input
+                id="numchassis"
+                formControlName="numchassis"
+                type="text"
+                class="form-control"
+                [title]="getPlaceholder8()"
+              />
+              <div
+                *ngIf="rsForm.get('numchassis')?.errors?.['required'] && rsForm.get('numchassis')?.touched"
+                class="text-danger"
+              >
+                Le choix du type de demande est obligatoire.
+              </div>
+            </div>
+  
+            <div class="col">
+              <label for="numImmatriculation">N° d'immatriculation :</label>
+              <input
+                id="numImmatriculation"
+                formControlName="numImmatriculation"
+                type="text"
+                class="form-control"
+                [title]="getPlaceholder9()"
+              />
+              <div
+                *ngIf="rsForm.get('numImmatriculation')?.errors?.['required'] && rsForm.get('numImmatriculation')?.touched"
+                class="text-danger"
+              >
+                Le numéro d'immatriculation est obligatoire.
+              </div>
+              <div
+                *ngIf="rsForm.get(' numImmatriculation')?.errors?.['pattern'] && rsForm.get('numImmatriculation')?.touched"
+                class="text-danger"
+              >
+                Le numéro d'immatriculation est invalide. Il doit être au format
+                XX-123-XX.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="marque">Marque :</label>
+              <input
+                type="text"
+                id="marque"
+                name="marque"
+                formControlName="marque"
+                class="form-control"
+                [title]="getPlaceholder14()"
+              />
+              <div
+                *ngIf="rsForm.get('marque')?.errors?.['required'] && rsForm.get('marque')?.touched"
+                class="text-danger"
+              >
+                Ce champ est requis.
+              </div>
+            </div>
+            <div class="col">
+              <label for="complementMarque">Complément Marque :</label>
+              <input
+                type="text"
+                id="complementMarque"
+                name="complementMarque"
+                formControlName="complementMarque"
+                class="form-control"
+                [title]="getPlaceholder15()"
+              />
+              <div
+                *ngIf="rsForm.get('complementMarque')?.errors?.['required'] && rsForm.get('complementMarque')?.touched"
+                class="text-danger"
+              >
+                Ce champ est requis.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <label for="paysOrigine" class="form-label">Pays Destination</label>
+        <select
+          id="paysOrigine"
+          formControlName="paysOrigine"
+          class="form-select"
+          [title]="getPlaceholder13()"
+        >
+          <option value="FI">FINLANDE</option>
+          <option value="FJ">FIDJI</option>
+          <option value="FK">I FALKLANDE</option>
+          <option value="FO">ILES FERODE</option>
+          <option value="FR">FRANCE</option>
+          <option value="GA">GABON</option>
+          <option value="GB">ROYAUME UNI</option>
+          <option value="GD">GRENADE</option>
+          <option value="GE">GEORGIE</option>
+          <option value="GF">GUYANE FR.</option>
+          <option value="GH">GHANA</option>
+          <option value="GI">GIBRALTAR</option>
+          <option value="GL">GROENLAND</option>
+          <option value="GM">GAMBIE</option>
+          <option value="GN">GUINEE</option>
+          <option value="GP">GUADELOUPE</option>
+          <option value="GQ">GUINEE</option>
+          <option value="GR">GRECE</option>
+          <option value="GT">GUATEMALA</option>
+          <option value="GW">GUINEE BISAW</option>
+          <option value="GY">GUYANA</option>
+          <option value="HK">HONG KONG</option>
+          <option value="HN">HONDURAS</option>
+          <option value="HR">CROATIE</option>
+          <option value="HT">HAITI</option>
+          <option value="HU">HONGRIE</option>
+          <option value="ID">INDONESIE</option>
+          <option value="IE">IRLANDE</option>
+          <option value="IL">ISRAEL</option>
+          <option value="IN">INDE</option>
+          <option value="IQ">IRAK</option>
+          <option value="IR">IRAN</option>
+          <option value="IS">ISLANDE</option>
+          <option value="IT">ITALIE</option>
+          <option value="JM">JAMAIQUE</option>
+          <option value="JO">JORDANIE</option>
+          <option value="JP">JAPON</option>
+          <option value="KE">KENYA</option>
+          <option value="KG">KIRGHIZISTAN</option>
+          <option value="KH">CAMBODGE</option>
+          <option value="KM">COMORES</option>
+          <option value="KP">COREE DU NORD</option>
+          <option value="KR">COREE DU SUD</option>
+          <option value="KW">KOWEIT</option>
+          <option value="KY">I.CAIMAN</option>
+          <option value="KZ">KASAKHISTAN</option>
+          <option value="LA">LAOS</option>
+          <option value="LB">LIBAN</option>
+          <option value="LI">LIECHTENSTEIN</option>
+          <option value="LK">SRI LANKA</option>
+          <option value="LR">LIBERIA</option>
+          <option value="LS">LESOTHO</option>
+          <option value="LT">LITHUANIE</option>
+          <option value="LU">LUXEMBOURG</option>
+          <option value="LV">LETTONIE</option>
+          <option value="LY">LIBYE</option>
+          <option value="MA">MAROC</option>
+          <option value="MC">MONACO</option>
+          <option value="MD">MOLDAVIE</option>
+          <option value="MG">MADAGASCAR</option>
+          <option value="MH">LES ILES MARSHALL</option>
+          <option value="MK">MACEDOINE-MKD</option>
+          <option value="ML">MALI</option>
+          <option value="MM">BIRMANIE</option>
+          <option value="MN">MONGOLIE</option>
+          <option value="MO">MACAO</option>
+          <option value="MQ">MARTINIQUE</option>
+          <option value="MR">MAURITANIE</option>
+          <option value="MT">MALTE</option>
+          <option value="MU">MAURICE</option>
+          <option value="MV">MALDIVES</option>
+          <option value="MW">MALAWI</option>
+          <option value="MX">MEXIQUE</option>
+          <option value="MY">MALAISIE</option>
+          <option value="MZ">MOZAMBIQUE</option>
+          <option value="NA">NAMIBIE</option>
+          <option value="NC">NOUV.CALEDONIE</option>
+          <option value="NE">NIGER</option>
+          <option value="NG">NIGERIA</option>
+          <option value="NI">NICARAGUA</option>
+          <option value="NL">PAYS BAS</option>
+          <option value="NO">NORVEGE</option>
+          <option value="NP">NEPAL</option>
+          <option value="NR">NAURU</option>
+          <option value="NZ">NOUV.ZELANDE</option>
+          <option value="OM">OMAN</option>
+          <option value="PA">PANAMA</option>
+          <option value="PE">PEROU</option>
+          <option value="PF">POLYNESIE FRANC.</option>
+          <option value="PG">PAP.NOU.GUINEE</option>
+          <option value="PH">PHILIPPINE</option>
+          <option value="PK">PAKISTAN</option>
+          <option value="PL">POLOGNE</option>
+          <option value="PM">SAINT PIERRE</option>
+          <option value="PN">GROUPE IRAK</option>
+          <option value="PR">PORTO RICO</option>
+          <option value="PS">PALESTINE</option>
+          <option value="PT">PORTUGAL</option>
+          <option value="PY">PARAGUAY</option>
+          <option value="QA">QUATAR</option>
+          <option value="RE">REUNION</option>
+          <option value="RO">ROUMANIE</option>
+          <option value="RU">RUSSIE EX.U.R.S.S</option>
+          <option value="RW">RUANDA</option>
+          <option value="SA">SAOUDIA</option>
+          <option value="SC">SEYCHELLES</option>
+          <option value="SD">SOUDAN</option>
+          <option value="SE">SUEDE</option>
+          <option value="SG">SINGAPOUR</option>
+          <option value="SH">SAINTE HEL</option>
+          <option value="SI">SLOVANIE</option>
+          <option value="SK">SLOVAQUIE</option>
+          <option value="SL">SIERRA LEO</option>
+          <option value="SM">SAINT-MARIN</option>
+          <option value="SN">SENEGAL</option>
+          <option value="SO">SOMALIE</option>
+          <option value="SR">SURINAM</option>
+          <option value="ST">SAO TOME</option>
+          <option value="SV">SALVADOR</option>
+          <option value="SY">SYRIE</option>
+          <option value="SZ">NGWANE EX SWAZILAND</option>
+          <option value="TC">I TURQ CAI</option>
+          <option value="TD">TCHAD</option>
+          <option value="TG">TOGO</option>
+          <option value="TH">THAILANDE</option>
+          <option value="TJ">TADJIKISTAN</option>
+          <option value="TM">TURKMENISTAN</option>
+          <option value="TN">TUNISIE</option>
+          <option value="TO">TONGA</option>
+          <option value="TR">TURQUIE</option>
+          <option value="TT">TRINIDAD ET TOBAGO</option>
+          <option value="TV">TUVALE</option>
+          <option value="TW">TAIWAN</option>
+          <option value="TZ">TANZANIE</option>
+          <option value="UA">UKRAINE</option>
+          <option value="UG">OUGANDA</option>
+          <option value="US">U.S.A</option>
+          <option value="UY">URUGUAY</option>
+          <option value="UZ">OUZBEKISTAN</option>
+          <option value="VA">VATICAN</option>
+          <option value="VC">SAINT-VINCENT</option>
+          <option value="VE">VENEZUELA</option>
+          <option value="VI">I.VIERGES U.S.A</option>
+          <option value="VN">VIETNAM</option>
+          <option value="VU">VANUATU</option>
+          <option value="WF">I.WALLIS</option>
+          <option value="WS">SAMOA OCCIDENTAL</option>
+          <option value="X2">YEMEN SUD</option>
+          <option value="YE">YEMEN NORD</option>
+          <option value="YT">MAYOTTE</option>
+          <option value="YU">YOUGOSLAVIE</option>
+          <option value="ZA">AFRIQUE DU SUD</option>
+          <option value="ZM">ZAMBIE</option>
+          <option value="ZR">ZAIRE</option>
+          <option value="ZW">ZAMBABWE</option>
+        </select>
+        <div
+          *ngIf="rsForm.get('paysOrigine')?.errors?.['required'] && rsForm.get('paysOrigine')?.touched"
+          class="text-danger"
+        >
+          Ce champ est requis.
+        </div>
+      </div>
+      <div class="m-3">
+        <div class="border p-4 mb-3">
+          <fieldset>
+            <legend>Mode d'apurement</legend>
+            <div class="form-group">
+              <label for="quantiteQCS">Quantité QCS :</label>
+              <input
+                type="text"
+                id="quantiteQCS"
+                formControlName="quantiteQCS"
+                class="form-control"
+              />
+              <div
+                *ngIf="
+                  rsForm.get('quantiteQCS')?.errors &&
+                  rsForm.get('quantiteQCS')?.touched
+                "
+              >
+                <div *ngIf="rsForm.get('quantiteQCS')?.errors?.['required']">
+                  La quantité est requise.
+                </div>
+                <div *ngIf="rsForm.get('quantiteQCS')?.errors?.['pattern']">
+                  Seules les valeurs numériques sont acceptées.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="poidsNet">Poids net :</label>
+              <input
+                type="text"
+                id="poidsNet"
+                formControlName="poidsNet"
+                class="form-control"
+              />
+              <div
+                *ngIf="
+                  rsForm.get('poidsNet')?.errors &&
+                  rsForm.get('poidsNet')?.touched
+                "
+              >
+                <div *ngIf="rsForm.get('poidsNet')?.errors?.['required']">
+                  Le poids net est requis.
+                </div>
+                <div *ngIf="rsForm.get('poidsNet')?.errors?.['pattern']">
+                  Seules les valeurs numériques sont acceptées.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="valeurDeviseEtrangere"
+                >Valeur en devise étrangère :</label
+              >
+              <input
+                type="text"
+                id="valeurDeviseEtrangere"
+                formControlName="valeurDeviseEtrangere"
+                class="form-control"
+              />
+              <div
+                *ngIf="
+                  rsForm.get('valeurDeviseEtrangere')?.errors &&
+                  rsForm.get('valeurDeviseEtrangere')?.touched
+                "
+              >
+                <small
+                  class="text-danger"
+                  *ngIf="rsForm.get('valeurDeviseEtrangere')?.errors?.['required']"
+                  >La valeur en devise étrangère est requise.</small
+                >
+                <small
+                  class="text-danger"
+                  *ngIf="rsForm.get('valeurDeviseEtrangere')?.errors?.['pattern']"
+                  >Seules les valeurs numériques sont autorisées.</small
+                >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="valeurDT">Valeur en DT :</label>
+              <input
+                type="text"
+                id="valeurDT"
+                formControlName="valeurDT"
+                class="form-control"
+              />
+              <div
+                *ngIf="
+                  rsForm.get('valeurDT')?.errors &&
+                  rsForm.get('valeurDT')?.touched
+                "
+              >
+                <small
+                  class="text-danger"
+                  *ngIf="rsForm.get('valeurDT')?.errors?.['required']"
+                  >La valeur en DT est requise.</small
+                >
+                <small
+                  class="text-danger"
+                  *ngIf="rsForm.get('valeurDT')?.errors?.['pattern']"
+                  >Seules les valeurs numériques sont autorisées.</small
+                >
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form-control"
+          [title]="getPlaceholder12()"
+        ></textarea>
+      </div>
+  
+      <div class="mb-3">
+        <label for="info" class="form-label">Informations complémentaires</label>
+        <textarea
+          id="info"
+          formControlName="info"
+          class="form-control"
+          [title]="getPlaceholder13()"
+        ></textarea>
+      </div>
+  
+      <div class="mb-3">
+        <label for="declartionPrecedente" class="form-label"
+          >Déclaration précédente</label
+        >
+        <input
+          id="declarationPrecedente"
+          formControlName="declarationPrecedente"
+          type="text"
+          class="form-control"
+          [title]="getPlaceholder14()"
+        />
+        <div
+          *ngIf="rsForm.get('declarationPrecedente')?.errors?.['required'] && rsForm.get('declarationPrecedente')?.touched"
+        >
+          Ce champ est obligatoire.
+        </div>
+      </div>
+      <div class="m-3">
+        <label for="motif" class="form-label">Motif</label>
+        <select
+          id="motif"
+          formControlName="motif"
+          class="form-select mb-3"
+          [title]="getPlaceholder16()"
+        >
+          <option value="asc">Ascendant</option>
+          <option value="des">Descendant</option>
+          <option value="fr">Frère ou Soeur</option>
+          <option value="emp">Employé</option>
+        </select>
+        <div
+          *ngIf="rsForm.get('motif')?.errors?.['required'] && rsForm.get('motif')?.touched"
+          class="text-danger"
+        >
+          Ce champ est obligatoire.
+        </div>
+      </div>
+      <!-- Propriétaire -->
+      <div class="border p-4 mb-3">
+        <fieldset>
+          <legend>Propriétaire</legend>
+          <div class="mb-2">
+            <div class="card card-body mb-2">
+              <div class="mb-3">
+                <label for="nom" class="form-label">Nom:</label>
+                <input
+                  formControlName="nom"
+                  id="nom"
+                  type="text"
+                  class="form-control"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="prenom" class="form-label">Prenom:</label>
+                <input
+                  formControlName="prenom"
+                  id="prenom"
+                  type="text"
+                  class="form-control"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="cinCarteSejour" class="form-label"
+                  >Numéro CIN/Carte Séjour:</label
+                >
+                <input
+                  formControlName="cinCarteSejour"
+                  id="cinCarteSejour"
+                  type="text"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+  
+      <div class="mb-3 d-flex justify-content-between align-items-center mt-3">
+        <button type="submit" class="btn btn-danger">Soumettre</button>
+        <button type="reset" class="btn btn-secondary">Réinitialiser</button>
+      </div>
+    </form>
+  </div>
+  

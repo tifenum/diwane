@@ -1,0 +1,14 @@
+/* src/app/components/create-bureau/create-bureau.component.css */
+form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  div {
+    margin-bottom: 10px;
+  }
+  
+  button {
+    width: 100px;
+  }
+  

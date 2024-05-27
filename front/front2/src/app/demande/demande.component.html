@@ -1,0 +1,202 @@
+<div class="container-xl px-4 mt-4">
+  <hr class="mt-0 mb-4">
+  <div class="row">
+    <div class="col-xl-4">
+      <!-- Profile picture card-->
+      <div class="card mb-4 mb-xl-0">
+        <div class="card-header">Image de profile</div>
+        <div class="card-body text-center">
+          <!-- Profile picture image-->
+          <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png"
+            alt="">
+          <h3 class="h4 mb-0"> <strong>Nom:</strong> {{ demandes?.desiDemande || 'Non spécifié' }}</h3>
+          <span class="text-primary"> <strong>Code Demande :</strong>{{ demandes?.codeDemande || 'Non spécifié'
+            }}</span>
+          <p><strong>ID:</strong> {{ demandes?.id }}</p>
+        </div>
+        <ul class="list-unstyled mb-4">
+          <li class="mb-3">
+            <a href="#!">
+              <i class="far fa-calendar display-25 me-3 text-secondary"></i>{{ demandes?.createdAt | date:'medium' }}
+            </a>
+          </li>
+
+          <li class="mb-3"><a href="#!"><i class="far fa-calendar display-25 me-3 text-secondary"></i>{{
+              demandes?.expirationAt | date:'medium' }}</a></li>
+          <li class="mb-3">
+            <a href="#!">
+              <i class="fas fa-hashtag display-25 me-3 text-secondary"></i>{{ demandes?.NumRef || 'Non spécifié' }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-xl-8">
+      <!-- Account details card-->
+      <div class="card mb-4">
+        <div class="card-header text-center font-weight-bold text-primary">Demande
+          <span class="float-end">
+            <li>
+              <a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete"
+                (click)="delete(demandes?.id ?? -1)">
+                <i class="bi bi-trash"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="text-info" data-toggle="tooltip" title="Edit"
+                (click)="verifyDemand(demandes?.id ?? -1, 'verifier', false)">
+                <i class="bi bi-check-lg"></i>
+              </a>
+            </li>
+          </span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <form>
+
+          <div class="container mt-4">
+            <div class="row gx-3 mb-3">
+
+              <div class="col-md-6">
+                <label for="statueDem" class="form-label">Statut:</label>
+                <input id="statueDem" type="text" class="form-control"
+                  value="{{ demandes?.statueDem || 'Non spécifié' }}" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label for="info" class="form-label">Informations Complémentaires:</label>
+                <input id="info" type="text" class="form-control" value="{{ demandes?.info || 'Non spécifié' }}"
+                  readonly>
+              </div>
+            </div>
+            <div class="row gx-3 mb-3">
+              <div class="col-md-6">
+                <label for="archiveAuto" class="form-label">Automatiquement Archivé:</label>
+                <input id="archiveAuto" type="text" class="form-control"
+                  value="{{ demandes?.archiveAuto ? 'Oui' : 'Non' }}" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label for="nationalite" class="form-label">Nationalité:</label>
+                <input id="nationalite" type="text" class="form-control"
+                  value="{{ demandes?.nationalite || 'Non spécifié' }}" readonly>
+              </div>
+            </div>
+            <div class="row gx-3 mb-3">
+              <div class="col-md-6">
+                <label for="motif" class="form-label">Motif:</label>
+                <input id="motif" type="text" class="form-control" value="{{ demandes?.motif || 'Non spécifié' }}"
+                  readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label for="numDiptyque" class="form-label">Numéro Diptyque:</label>
+                <input id="numDiptyque" type="text" class="form-control"
+                  value="{{ demandes?.numDiptyque || 'Non spécifié' }}" readonly>
+              </div>
+            </div>
+            <div class="row gx-3 mb-3">
+              <div class="col-md-6">
+                <label for="numchassis" class="form-label">Numéro de Châssis:</label>
+                <input id="numchassis" type="text" class="form-control"
+                  value="{{ demandes?.numchassis || 'Non spécifié' }}" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label for="numImmatriculation" class="form-label">Numéro d'Immatriculation:</label>
+                <input id="numImmatriculation" type="text" class="form-control"
+                  value="{{ demandes?.numImmatriculation || 'Non spécifié' }}" readonly>
+              </div>
+            </div>
+            <div class="row gx-3 mb-3">
+              <div class="col-md-6">
+                <label for="marque" class="form-label">Marque:</label>
+                <input id="marque" type="text" class="form-control" value="{{ demandes?.marque || 'Non spécifié' }}"
+                  readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label for="motifArret" class="form-label">Motif d'Arrêt:</label>
+                <input id="motifArret" type="text" class="form-control"
+                  value="{{ demandes?.motifArret || 'Non spécifié' }}" readonly>
+              </div>
+            </div>
+            <div class="row gx-3 mb-3">
+              <div class="col-md-6">
+                <label for="description" class="form-label">Description supplémentaire:</label>
+                <input id="description" type="text" class="form-control"
+                  value="{{ demandes?.description || 'Non spécifié' }}" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label for="interdictionsEtRestrictions" class="form-label">Interdictions et Restrictions:</label>
+                <input id="interdictionsEtRestrictions" type="text" class="form-control"
+                  value="{{ demandes?.interdictionsEtRestrictions || 'Non spécifié' }}" readonly>
+              </div>
+            </div>
+            <div class="row gx-3 mb-3">
+              <div class="col-md-6">
+                <label for="guaranteeReferenceNumber" class="form-label">Numéro de Référence de la Garantie:</label>
+                <input id="guaranteeReferenceNumber" type="text" class="form-control"
+                  value="{{ demandes?.guaranteeReferenceNumber || 'Non spécifié' }}" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label for="montantGarantie" class="form-label">Montant de la Garantie:</label>
+                <input id="montantGarantie" type="text" class="form-control"
+                  value="{{ demandes?.montantGarantie | currency }}" readonly>
+              </div>
+            </div>
+            <div class="row gx-3 mb-3">
+              <div class="col-md-6">
+                <label for="declartionPrecedente" class="form-label">Déclaration Précédente:</label>
+                <input id="declartionPrecedente" type="text" class="form-control"
+                  value="{{ demandes?.declartionPrecedente || 'Non spécifié' }}" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label for="echianceDate" class="form-label">Date d'Échéance:</label>
+                <input id="echianceDate" type="text" class="form-control"
+                  value="{{ demandes?.echianceDate | date:'mediumDate' }}" readonly>
+              </div>
+            </div>
+            <div class="row gx-3 mb-3">
+              <!-- <div class="col-md-6">
+                <label for="bureauAutoriteId" class="form-label">ID de l'Autorité du Bureau:</label>
+                <input id="bureauAutoriteId" type="text" class="form-control"
+                  value="{{ demandes?.bureauAutoriteId || 'Non spécifié' }}" readonly>
+              </div> -->
+
+              <!-- <div class="col-md-6">
+                <label for="vehiculleId" class="form-label">ID du Véhicule:</label>
+                <input id="vehiculleId" type="text" class="form-control"
+                  value="{{ demandes?.vehiculleId || 'Non spécifié' }}" readonly>
+              </div> -->
+            </div>
+            <!-- <div class="row gx-3 mb-3">
+              <div class="col-md-6">
+                <label for="createUserId" class="form-label">ID de Création de l'Utilisateur:</label>
+                <input id="createUserId" type="text" class="form-control"
+                  value="{{ demandes?.createUserId || 'Non spécifié' }}" readonly>
+              </div>
+
+              <div class="col-md-6">
+                <label for="verifyUserId" class="form-label">ID de Vérification de l'Utilisateur:</label>
+                <input id="verifyUserId" type="text" class="form-control"
+                  value="{{ demandes?.verifyUserId || 'Non spécifié' }}" readonly>
+              </div>
+            </div> -->
+
+
+            <!-- <div class="col-md-6">
+              <label for="validateUserId" class="form-label">ID de Validation de l'Utilisateur:</label>
+              <input id="validateUserId" type="text" class="form-control"
+                value="{{ demandes?.validateUserId || 'Non spécifié' }}" readonly>
+            </div> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

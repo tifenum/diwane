@@ -1,0 +1,204 @@
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+
+<div class="container-fluid bg-primary px-5 d-none d-lg-block">
+    <div class="row gx-0">
+        <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+            <div class="d-inline-flex align-items-center" style="height: 45px;">
+               
+                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="https://www.facebook.com/douane.tunisie/"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="https://twitter.com/i/flow/login?redirect_after_login=%2FDouaneTunisie"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-square btn-primary rounded-circle mx-1" href="https://www.youtube.com/channel/UCnaeFNIErTt_coPSykdnCWg/featured"><i class="fab fa-youtube"></i></a>
+
+            </div>
+        </div>
+        <div class="col-lg-4 text-center text-lg-end">
+           
+            <div class="d-inline-flex align-items-center" style="height: 45px;">
+              
+               <a href="#" class="me-3 text-light"><small><i class="far fa-bell me-2"></i>Notification</small></a>
+             
+               <a href="#" class="me-3 text-light" (click)="logout()"><small><i class="fa fa-user me-2"></i>log out </small></a>
+               
+               <a href="#" class="me-3 text-light" data-toggle="modal" data-target="#myModal" >
+                <small>
+                    <i class="fas fa-exclamation-circle" ></i>
+                    Reclamation
+                </small>
+            </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      
+      </div>
+      <div class="modal-body">
+
+
+
+        <div class="login-container animated fadeInDown bootstrap snippets bootdeys">
+            <div class="loginbox bg-white">
+                <div class="loginbox-title">Reclamation</div>
+                <div class="loginbox-social">
+                    <div class="social-title ">
+                      
+                      
+                      Besoin d'aide ? Faites-nous part de vos préoccupations !</div>
+                    <div class="social-buttons">
+                      <a class="btn btn-square btn-primary rounded-circle mx-1" href="https://www.facebook.com/douane.tunisie/"><i class="fab fa-facebook-f"></i></a>
+                      <a class="btn btn-square btn-primary rounded-circle mx-1" href="https://twitter.com/i/flow/login?redirect_after_login=%2FDouaneTunisie"><i class="fab fa-twitter"></i></a>
+                      <a class="btn btn-square btn-primary rounded-circle mx-1" href="https://www.youtube.com/channel/UCnaeFNIErTt_coPSykdnCWg/featured"><i class="fab fa-youtube"></i></a>
+  
+                    </div>
+                </div>
+                <div class="loginbox-or">
+                  <label for="subject"> <i class="fa fa-envelope"></i>Sujet:</label>
+                  <input type="text" id="subject" [(ngModel)]="contact.subject" name="subject" class="form-control" required placeholder="Entrez le sujet" required #subjectRef="ngModel">
+                </div>
+                <div class="loginbox-textbox">
+                  <label for="message">  <i class="fa fa-comment"></i>Message:</label>
+                  <textarea id="message" [(ngModel)]="contact.message" name="message" rows="6" class="form-control" required placeholder="Écrivez votre message ici" required #messageRef="ngModel"></textarea>
+                </div>
+                
+                <div class="loginbox-submit">
+                  <button (click)="sendContactMessage()" type="submit"  class="btn btn-info btn-block">
+                    <i class="bi bi-location-arrow"></i> Envoyer le message
+                </button>
+                </div>
+                
+            </div>
+            <div class="logobox">
+            </div>
+        </div>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-10 col-md-offset-1">
+    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" class="avatar">
+</div>
+<div id="profileCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner text-center">
+      <div class="carousel-item active">
+        <div class="profile-desk">
+          
+            <h1>Profil de l'Utilisateur</h1>
+            <p><strong>Prénom:</strong> {{ user.firstname }}</p>
+            <p><strong>Nom:</strong> {{ user.lastname }}</p>
+           
+            <p><strong>email:</strong> {{user.email }}</p>
+          
+      </div>
+      
+      <div class="carousel-item">
+        <div class="profile-desk">
+          
+            <h1>Profil de l'Utilisateur</h1>
+            <p><strong>Prénom:</strong> {{ user.firstname }}</p>
+            <p><strong>Nom:</strong> {{ user.lastname }}</p>
+           
+          
+        </div>
+      </div>
+      
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#profileCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#profileCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+<div class="container mt-3 mb-4">
+<div class="col-lg-9 mt-4 mt-lg-0">
+<div class="row">
+  <div class="col-md-12">
+    <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
+      <table class="table manage-candidates-top mb-0">
+        <thead>
+          <tr>
+            <th>Nom de client </th>
+            <th class="text-center">Status</th>
+            <th class="action text-right">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="candidates-list">
+            <td class="title">
+              <div class="thumb">
+                <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+              </div>
+              <div class="candidate-list-details">
+                <div class="candidate-list-info">
+                  <div class="candidate-list-title">
+                    <div *ngFor="let demande of demandes">
+
+                    <h5 class="mb-0"><a href="#">{{demande.desiDemande}}</a></h5>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </td>
+            <td class="candidate-list-favourite-time text-center">
+              <a class="candidate-list-favourite order-2 text-danger" href="#"><i class="fas fa-heart"></i></a>
+              <span class="candidate-list-time order-1">En attende</span>
+            </td>
+            <td>
+              <ul class="list-unstyled mb-0 d-flex justify-content-end">
+                <li *ngFor="let demande of demandes">
+                  <a  class="text-info" data-toggle="tooltip" title="View Details"  [routerLink]="['/detail',demande.id]">
+                    <i class="bi bi-eye"></i>
+                  </a>
+                  
+                </li>
+               
+              
+
+                
+              
+                
+              </ul>
+            </td>
+          </tr>
+          
+         
+          
+          
+        </tbody>
+      </table>
+      
+      
+    </div>
+  </div>
+</div>
+</div>
+</div>
+

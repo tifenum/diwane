@@ -1,0 +1,37 @@
+<div class="data-container">
+    <h1>DEMANDE D'AUTORISATION DE CIRCULATION POUR UN VEHICULE AUTOMOBILE</h1>
+  
+    <div class="information-section">
+      <h2>INFORMATIONS CONCERNANT LE BENEFICIAIRE:</h2>
+      <p>1) Nom: {{ formData?.personalInformation?.name }}</p>
+      <p>2) Prénom: {{ formData?.personalInformation?.prenom }}</p>
+      <p>3) Nationalité: {{ formData?.personalInformation?.nationality }}</p>
+      <p>4) Passeport: {{ formData?.personalInformation?.passport }}</p>
+      <p>5) CIN: {{ formData?.personalInformation?.cin }}</p>
+      <p>6) Gouvernorat: {{ formData?.personalInformation?.gov }}</p>
+      <p>7) Adresse: {{ formData?.personalInformation?.address }}</p>
+      <!-- Ajouter ici les autres champs concernant le bénéficiaire si nécessaire -->
+    </div>
+  
+    <div class="information-section">
+      <h2>INFORMATIONS CONCERNANT LE VEHICULE:</h2>
+      <p>1) Numéro d'immatriculation: {{ formData?.vehicleInformation?.registration }}</p>
+      <p>2) Numéro de châssis: {{ formData?.vehicleInformation?.chassis }}</p>
+      <p>3) Énergie: {{ formData?.vehicleInformation?.energy }}</p>
+      <p>4) Marque: {{ formData?.vehicleInformation?.brand }}</p>
+      <p>5) Modèle: {{ formData?.vehicleInformation?.model }}</p>
+      <p>6) Couleur: {{ formData?.vehicleInformation?.color }}</p>
+      <p>7) Date de première mise en circulation: {{ formData?.vehicleInformation?.firstCirculationDate | date: 'dd/MM/yyyy'  }}</p>
+     <!-- <p>7) Date de première mise en circulation: {{ formData?.vehicleInformation?.firstCirculationDate | date:'mediumDate' }}</p>-->
+      <!-- Ajouter ici les autres champs concernant le véhicule si nécessaire -->
+    </div>
+  
+    <div class="qr-code-container">
+      <img [src]="qrDataUrl" alt="Code QR">
+    </div>
+  
+    <div class="center-button">
+        <button (click)="imprimerPage()">Accepter</button>
+      </div>
+      
+  

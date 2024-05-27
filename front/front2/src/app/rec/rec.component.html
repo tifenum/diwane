@@ -1,0 +1,64 @@
+
+      
+  
+<div class="carousel-header">
+    <!-- Nouvelle div pour les liens -->
+    <div class="text-center my-3">
+        <a href="#" class="text-light me-3">
+            <i class="fas fa-sign-out-alt me-1"></i> Log Out
+        </a>
+        <a class="text-light" routerLink="/admin">
+            <i class="fas fa-arrow-left me-1"></i> Back
+        </a>
+    </div>
+
+    <!-- Début du carousel -->
+    <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active"></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="1"></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <!-- Items du carousel ici... -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon btn bg-primary" aria-hidden="false"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+            <span class="carousel-control-next-icon btn bg-primary" aria-hidden="false"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+<div class="container">
+    <section id="contact" class="padding-top-bottom">
+        <div class="row">
+            <!-- Formulaire pour envoyer un message -->
+            <div class="col-sm-6 col-sm-offset-3">
+                <form  novalidate>
+                    <!-- Champ pour le sujet du message -->
+                    <div class="form-group">
+                        <label for="subject">Sujet:</label>
+                        <input type="text" id="subject" [(ngModel)]="contact.subject" name="subject" class="form-control" required placeholder="Entrez le sujet" required #subjectRef="ngModel">
+                    </div>
+
+                    <!-- Zone de texte pour le corps du message -->
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" [(ngModel)]="contact.message" name="message" rows="6" class="form-control" required placeholder="Écrivez votre message ici" required #messageRef="ngModel"></textarea>
+                    </div>
+
+                    <!-- Bouton pour envoyer le formulaire -->
+                    <button (click)="sendContactMessage()" type="submit"  class="btn btn-info btn-block">
+                        <i class="fa fa-location-arrow"></i> Envoyer le message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

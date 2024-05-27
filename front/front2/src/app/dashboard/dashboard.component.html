@@ -1,0 +1,25 @@
+<div class="container">
+ 
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Demandes par Statut</h2>
+        <apx-chart 
+          [series]="chartOptions.series" 
+          [chart]="chartOptions.chart" 
+          [labels]="chartOptions.labels" 
+          [fill]="chartOptions.fill" 
+          [title]="chartOptions.title" 
+          [dataLabels]="chartOptions.dataLabels" 
+          [plotOptions]="chartOptions.plotOptions" 
+          [responsive]="chartOptions.responsive">
+        </apx-chart>
+        <p>Nombre total de demandes: {{ totalDemandes }}</p>
+      </div>
+      <div class="col-md-6">
+        <h2>Utilisateurs par Rôle</h2>
+        <canvas id="userRoleChart"></canvas>
+        <p>Nombre total d'utilisateurs: {{ totalUsers }}</p>
+      </div>
+    </div>
+  </div>
+  

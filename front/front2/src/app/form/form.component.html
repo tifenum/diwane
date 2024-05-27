@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>e-service</title>
+   
+    <link rel="shortcut icon" href="product_img/favicon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- font awesome icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css"
+        integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<header>
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-light nav-yellow border-bottom border-top p-0">
+        <div class="container">
+            <a class="navbar-brand fs-4 fw-bold" href="#">
+                <img src="assets/logo.jpg" alt="Logo" style="height: 40px;"> <!-- Ajustez le chemin d'accès et la taille comme nécessaire -->
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Toggle -->
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Nav Items -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center">
+                    <!-- Home Link -->
+                    <li class="nav-item">
+                        <a class="nav-link redHover fw-semibold text-uppercase text-black me-3" routerLink="/home">Home</a>                    </li>
+                    <!-- Contact Link -->
+                    <li class="nav-item">
+                        <a class="nav-link redHover fw-semibold text-uppercase text-black me-3" routerLink="/contact">Contact</a>
+                      </li>
+                      
+                    <!-- ... -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle redHover fw-semibold text-uppercase text-black me-1"
+                            href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="fa fa-user fs-5 me-1" style="color: #202122;"></i>
+                        </a>
+                        <ul class="dropdown-menu" style="left:-50px" aria-labelledby="navbarDropdown">
+                            <li class="nav-item d-flex align-items-center">
+                                <button type="button" id="signinModal" class="btn btn-primary me-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Login</button>
+                                <button type="button"id="signupModal"  class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Register</button>
+                              </li>
+                        </ul>
+                    </li>
+                    <!-- ... -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container mt-5">
+    <div class="row">
+      <!-- Carte 1 -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100 text-center">
+          <div class="card-body">
+            <i class="fas fa-car fa-3x mb-3"></i>
+            <h5 class="card-title">Taxation de Véhicule</h5>
+            <p class="card-text">Description courte sur la taxation des véhicules.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">En savoir plus</a>
+          </div>
+        </div>
+      </div>
+      <!-- Carte 2 -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100 text-center">
+          <div class="card-body">
+            <i class="fas fa-file-invoice-dollar fa-3x mb-3"></i>
+            <h5 class="card-title">Tarifs et Nomenclatures</h5>
+            <p class="card-text">Informations sur les tarifs douaniers et classifications.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">En savoir plus</a>
+          </div>
+        </div>
+      </div>
+      <!-- Carte 3 -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100 text-center">
+          <div class="card-body">
+            <i class="fas fa-search fa-3x mb-3"></i>
+            <h5 class="card-title"> permis de circulation "RS"</h5>
+            <p class="card-text">Ce système semble être destiné aux personnes physiques ou morales étrangères résidant temporairement en Tunisie, qui bénéficient d'une admission temporaire des véhicules avec une franchise totale ou partielle des droits et taxes (DT).
+
+              .</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">En savoir plus</a>
+          </div>
+        </div>
+      </div>
+      <!-- Carte 4 -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100 text-center">
+          <div class="card-body">
+            <i class="fas fa-clipboard-list fa-3x mb-3"></i>
+            <h5 class="card-title">Demande d'Autorisation de Circulation</h5>
+            <p class="card-text">Procédez aux démarches pour obtenir l'autorisation de circuler.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">En savoir plus</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  ``
