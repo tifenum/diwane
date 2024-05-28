@@ -37,3 +37,14 @@
     padding: 5px; /* Ajoute un peu de padding pour mieux visualiser le champ */
     border-radius: 5px; /* Arrondit les bords pour un style plus doux */
   }
+  .hide-dropdown::-ms-expand,
+.hide-dropdown::-webkit-inner-spin-button,
+.hide-dropdown::-webkit-outer-spin-button {
+  display: none;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Adjust margin as needed */
+  }

@@ -6,7 +6,11 @@
   .title-animation {
     animation: fadeInDown 1s ease-in-out;
   }
-  
+  .header-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
   @keyframes fadeInDown {
     0% {
         opacity: 0;
@@ -37,3 +41,15 @@
     padding: 5px; /* Ajoute un peu de padding pour mieux visualiser le champ */
     border-radius: 5px; /* Arrondit les bords pour un style plus doux */
   }
+  @media (min-width: 992px) {
+    .align-lg-start {
+      align-items: start !important;
+      justify-content: flex-start !important;
+    }
+  
+    .align-lg-end {
+      align-items: end !important;
+      justify-content: flex-end !important;
+    }
+  }
+  

@@ -34,6 +34,11 @@ import { UpdateForm4Component } from './update-form4/update-form4.component';
 import { AjoubureauxxComponent } from './ajoubureauxx/ajoubureauxx.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { DemandevalidComponent } from './demandevalid/demandevalid.component';
+import { SeedemandesComponent } from './seedemandes/seedemandes.component';
+import { See1Component } from './see1/see1.component';
+import { See2Component } from './see2/see2.component';
+import { See3Component } from './see3/see3.component';
+import { See4Component } from './see4/see4.component';
 
 
 
@@ -57,7 +62,7 @@ const routes: Routes = [
   { path: 'bureau', component: AjoubureauxxComponent },
   { path: 'feedback', component:FeedbackComponent },
   { path: 'chat', component: ChatComponent },
-
+  { path: 'seedemands', component: SeedemandesComponent},
   { path: 'reclamation',component : ReclamationComponent},
   { path: 'user-list', component: UserListComponent },
   { path: 'detail/:id', component: DemandeComponent },
@@ -68,6 +73,10 @@ const routes: Routes = [
   { path: 'updateform2/:id' , component: UpdateForm2Component},
   { path: 'updateform3/:id', component:UpdateForm3Component},
   { path: 'updateform4/:id', component:UpdateForm4Component},
+  { path: 'see1/:id', component: See1Component},
+  { path: 'see2/id', component: See2Component},
+  { path: 'see3/id', component: See3Component},
+  { path: 'see4/id', component: See4Component},
   { path: 'feedback', component:FeedbackComponent}
  
  

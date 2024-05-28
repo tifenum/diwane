@@ -1,0 +1,524 @@
+<div class="container-fluid bg-primary px-5 d-none d-lg-block">
+    <div class="row gx-0">
+      <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
+        <div class="d-inline-flex align-items-center" style="height: 45px">
+          <a
+            class="btn btn-square btn-primary rounded-circle mx-1"
+            href="https://www.facebook.com/douane.tunisie/"
+            ><i class="bi bi-facebook"></i
+          ></a>
+          <a
+            class="btn btn-square btn-primary rounded-circle mx-1"
+            href="https://twitter.com/i/flow/login?redirect_after_login=%2FDouaneTunisie"
+            ><i class="bi bi-twitter"></i
+          ></a>
+          <a
+            class="btn btn-square btn-primary rounded-circle mx-1"
+            href="https://www.youtube.com/channel/UCnaeFNIErTt_coPSykdnCWg/featured"
+            ><i class="bi bi-youtube"></i
+          ></a>
+        </div>
+      </div>
+      <div class="col-lg-4 text-center text-lg-end">
+        <div class="d-inline-flex align-items-center" style="height: 45px">
+          <div ngbDropdown class="dropdown">
+            <button
+              class="btn btn-primary"
+              type="button"
+              id="dropdownMenuButton1"
+              [routerLink]="[ '/myform']"
+            >
+              Mes formulaires
+            </button>
+            <button
+              class="btn btn-primary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              ngbDropdownToggle
+            >
+              My Dashboard
+            </button>
+            <ul
+              ngbDropdownMenu
+              class="dropdown-menu"
+              aria-labelledby="dropdownMenuButton1"
+            >
+              <li>
+                <a class="dropdown-item" href="#"
+                  ><i class="bi bi-bell me-2"></i> Notifications</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="goToCompte()"
+                  ><i class="bi bi-cog me-2"></i>Compte</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  *ngIf="tokenService.isLoggedIn()"
+                  (click)="logout()"
+                  ><i class="bi bi-box-arrow-right"></i> Log Out</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container border border-dark p-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-center mt-5 fw-bold text-uppercase title-animation">
+            Se
+          </h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-center mt-5 fw-bold text-uppercase title-animation">
+            Demande d'autorisation de Permis de circulation d'un véhicule
+            immatriculé à l'étranger
+          </h1>
+        </div>
+      </div>
+    </div>
+  
+    <form [formGroup]="rsForm" (ngSubmit)="onSubmit()" class="container mt-5">
+      <div class="row">
+        <div class="col">
+          <label for="codeDemande" class="form-label"
+            >CIN /Numéro Passport :</label
+          >
+          <input
+            id="codeDemande"
+            formControlName="codeDemande"
+            type="text"
+            class="form-control"
+            pattern=".{9}"
+            title="Veuillez entrer votre numéro de CIN"
+            [title]="getPlaceholder3()"
+            readonly
+
+          />
+          <div
+            *ngIf="rsForm.get('cin')?.errors?.['required'] && rsForm.get('codeDemande')?.touched"
+            class="text-danger"
+          >
+            Ce champ est obligatoire.
+          </div>
+  
+          <div
+            *ngIf="rsForm.get('codeDemande')?.errors?.['pattern'] && rsForm.get('codeDemande')?.touched"
+            class="text-danger"
+          >
+            le CIN doit etre 8 chiffre
+          </div>
+        </div>
+        <div class="col">
+          <label for="typeDemande" class="form-label">Type de demande</label>
+          <select
+            id="typeDemande"
+            formControlName="typeDemande"
+            class="form-select"
+            title="Veuillez sélectionner le type de votre demande."
+            [title]="getPlaceholder4()"
+          >
+          </select>
+  
+          <div
+            *ngIf="rsForm.get('typeDemande')?.errors?.['required'] && rsForm.get('typeDemande')?.touched"
+            class="text-danger"
+          >
+            Le choix du type de demande est obligatoire.
+          </div>
+          <div *ngIf="rsForm.get('typeDemande')?.value === 'dRenouvellement'">
+            <div class="form-column">
+              <label for="docTaxeCirculationUrl" class="form-label"
+                >Carte Grise Image</label
+              >
+              <input
+                type="file"
+                name="docTaxeCirculationUrl"
+                formControlName="docTaxeCirculationUrl"
+                id="docTaxeCirculationUrl"
+                class="form-control"
+                accept="image/*"
+                readonly
+
+              />
+            </div>
+          </div>
+          <div *ngIf="rsForm.get('typeDemande')?.value === 'dArret'" class="mb-3">
+            <label for="motifArret">Motif d'arrêt :</label>
+            <select
+              id="motifArret"
+              formControlName="motifArret"
+              class="form-select"
+              title="Veuillez choisir un motif d'arrêt."
+              aria-describedby="motifArretError"
+            >
+            </select>
+            <div
+              *ngIf="
+                rsForm.get('motifArret')?.errors &&
+                rsForm.get('motifArret')?.touched
+              "
+              id="motifArretError"
+              class="text-danger"
+            >
+              <div *ngIf="rsForm.get('motifArret')?.errors?.['required']">
+                Le choix d'un motif d'arrêt est obligatoire.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="expirationAt" class="form-label"
+          >Date d'expiration de la décision</label
+        >
+        <input
+          id="expirationAt"
+          formControlName="expirationAt"
+          type="date"
+          class="form-control"
+          [title]="getPlaceholder5()"
+          readonly
+
+        />
+        <div
+          *ngIf="rsForm.get('expirationAt')?.errors?.['required'] && rsForm.get('expirationAt')?.touched"
+          class="text-danger"
+        >
+          Ce champ est requis.
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="brRattachement">Bureau de douane de rattachement :</label>
+  
+          <select
+            id="brRattachement"
+            formControlName="brRattachement"
+            class="form-select"
+            title="Veuillez sélectionner le bureau."
+            [title]="getPlaceholder()"
+          >
+          </select>
+        </div>
+  
+        <div class="mb-3">
+          <div class="col">
+            <label for="brFrontalier">Bureau de douane frontalier :</label>
+            <select
+              id="brFrontalier"
+              formControlName="brFrontalier"
+              class="form-select"
+              title="Veuillez sélectionner le bureau."
+              [title]="getPlaceholder()"
+            >
+            </select>
+          </div>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <!-- Première ligne de champs -->
+        <div class="form-row">
+          <div class="form-column">
+            <label for="cinUrl" class="form-label">CIN Image</label>
+            <input
+              type="file"
+              name="cinUrl"
+              formControlName="cinUrl"
+              id="cinUrl"
+              class="form-control"
+              accept="image/*"
+              required
+              readonly
+
+            />
+          </div>
+          <div class="form-column">
+            <label for="docPlaqueImmatriculation" class="form-label"
+              >Plaque d'Immatriculation Image</label
+            >
+            <input
+              type="file"
+              name="docPlaqueImmatriculation"
+              formControlName="docPlaqueImmatriculation"
+              id="docPlaqueImmatriculation"
+              class="form-control"
+              accept="image/*"
+            />
+          </div>
+          <div class="form-column">
+            <label for="docContratAssurance" class="form-label"
+              >Contrat d'Assurance Image</label
+            >
+            <input
+              type="file"
+              name="docContratAssurance"
+              formControlName="docContratAssurance"
+              id="docContratAssurance"
+              class="form-control"
+              accept="image/*"
+              readonly
+
+            />
+          </div>
+          <div class="form-column">
+            <label for="passportUrl" class="form-label">Passeport Image</label>
+            <input
+              type="file"
+              name="passportUrl"
+              formControlName="passportUrl"
+              id="passportUrl"
+              class="form-control"
+              accept="image/*"
+            />
+          </div>
+        </div>
+  
+        <!-- Deuxième ligne de champs -->
+        <div class="form-row">
+          <div class="form-column">
+            <label for="carteGriseUrl" class="form-label"
+              >Carte Grise Image</label
+            >
+            <input
+              type="file"
+              name="carteGriseUrl"
+              formControlName="carteGriseUrl"
+              id="carteGriseUrl"
+              class="form-control"
+              accept="image/*"
+              readonly
+
+            />
+          </div>
+          <div class="form-column">
+            <label for="justPossessionUrl" class="form-label"
+              >Justificatif de Possession Image</label
+            >
+            <input
+              type="file"
+              name="justPossessionUrl"
+              formControlName="justPossessionUrl"
+              id="justPossessionUrl"
+              class="form-control"
+              accept="image/*"
+              readonly
+
+            />
+          </div>
+          <div class="form-column">
+            <label for="autrJustUrl" class="form-label"
+              >Autre document justificatif</label
+            >
+            <input
+              type="file"
+              name="autrJustUrl"
+              formControlName="autrJustUrl"
+              id="autrJust"
+              class="form-control"
+              accept="image/*"
+              readonly
+
+            />
+          </div>
+          <div class="form-column">
+            <label for="assuranceUrl" class="form-label"
+              >Assurance Copie Image</label
+            >
+            <input
+              type="file"
+              name="assuranceUrl"
+              formControlName="assuranceUrl"
+              id="assuranceUrl"
+              class="form-control"
+              accept="image/*"
+              readonly
+
+            />
+          </div>
+        </div>
+      </div>
+  
+      <div class="border p-4 mb-3">
+        <div>
+          <legend>Identification des marchandises :</legend>
+          <div class="row">
+            <div class="col">
+              <label for="numchassis">Numéro de châssis:</label>
+              <input
+                id="numchassis"
+                formControlName="numchassis"
+                type="text"
+                class="form-control"
+                [title]="getPlaceholder8()"
+                readonly
+
+              />
+              <div
+                *ngIf="rsForm.get('numchassis')?.errors?.['required'] && rsForm.get('numchassis')?.touched"
+                class="text-danger"
+              >
+                Le choix du type de demande est obligatoire.
+              </div>
+            </div>
+  
+            <div class="col">
+              <label for="numImmatriculationation">N° d'immatriculation :</label>
+              <input
+                id="numImmatriculationn"
+                formControlName="numImmatriculation"
+                type="text"
+                class="form-control"
+                [title]="getPlaceholder9()"
+                readonly
+
+              />
+              <div
+                *ngIf="rsForm.get('numImmatriculation')?.errors?.['required'] && rsForm.get('numImmatriculation')?.touched"
+                class="text-danger"
+              >
+                Le numéro d'immatriculation est obligatoire.
+              </div>
+              <div
+                *ngIf="rsForm.get('numImmatriculation')?.errors?.['pattern'] && rsForm.get('numImmatriculation')?.touched"
+                class="text-danger"
+              >
+                Le numéro d'immatriculation est invalide. Il doit être au format
+                XX-123-XX.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="marque">Marque :</label>
+              <input
+                type="text"
+                id="marque"
+                formControlName="marque"
+                class="form-control"
+                [title]="getPlaceholder14()"
+                readonly
+              />
+              <div
+                *ngIf="rsForm.get('marque')?.errors?.['required'] && rsForm.get('marque')?.touched"
+                class="text-danger"
+              >
+                Ce champ est requis.
+              </div>
+            </div>
+            <div class="col">
+              <label for="complementMarque">Complément Marque :</label>
+              <input
+                type="text"
+                id=" complementMarque"
+                formControlName="complementMarque"
+                class="form-control"
+                [title]="getPlaceholder15()"
+                readonly
+              />
+              <div
+                *ngIf="rsForm.get(' complementMarque')?.errors?.['required'] && rsForm.get(' complementMarque')?.touched"
+                class="text-danger"
+              >
+                Ce champ est requis.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col">
+          <label for="paysOrigine" class="form-label"
+            >Pays Origine/provenance</label
+          >
+          <select
+            id="paysOrigine"
+            formControlName="paysOrigine"
+            class="form-select"
+            [title]="getPlaceholder13()"
+          >
+          </select>
+          <div
+            *ngIf="rsForm.get('paysOrigineProvenance')?.errors?.['required'] && rsForm.get('paysOrigineProvenance')?.touched"
+            class="text-danger"
+          >
+            Ce champ est requis.
+          </div>
+        </div>
+  
+        <div class="col">
+          <label for="nationalite" class="form-label">Nationalité</label>
+          <select
+            id="nationalite"
+            formControlName="nationalite"
+            class="form-select"
+            [title]="getPlaceholder10()"
+          >
+          </select>
+          <div
+            *ngIf="rsForm.get('nationalite')?.errors?.['required'] && rsForm.get('nationalite')?.touched"
+            class="text-danger"
+          >
+            Ce champ est requis.
+          </div>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="info" class="form-label">Informations complémentaires</label>
+        <textarea
+          id="info"
+          formControlName="info"
+          class="form-control"
+          [title]="getPlaceholder13()"
+        ></textarea>
+      </div>
+  
+      <div class="row">
+        <div class="col">
+          <label for="motif" class="form-label">Motif</label>
+          <select
+            id="motif"
+            formControlName="motif"
+            class="form-select mb-3"
+            [title]="getPlaceholder16()"
+          >
+
+          </select>
+          <div
+            *ngIf="rsForm.get('motif')?.errors?.['required'] && rsForm.get('motif')?.touched"
+            class="text-danger"
+          >
+            Ce champ est obligatoire.
+          </div>
+        </div>
+  
+        <!-- <div class="col">
+          <label for="numDiptyque" class="form-label">Numéro Diptyque</label>
+          <input id="numDiptyque" formControlName="numDiptyque" type="text" class="form-control mb-3" pattern=".{12}" title="12 caractères requis" [title]="getPlaceholder17()">
+          <div *ngIf="rsForm.get('numDiptyque')?.errors?.['required'] && rsForm.get('numDiptyque')?.touched" class="text-danger">
+              Ce champ est requis.
+          </div>
+          <div *ngIf="rsForm.get('numDiptyque')?.errors?.['pattern'] && rsForm.get('numDiptyque')?.touched" class="text-danger">
+              Le numéro Diptyque doit contenir exactement 12 caractères.
+          </div>
+      </div> -->
+      </div>
+      
+      <div class="mb-3 d-flex justify-content-between align-items-center mt-3">
+    </div>
+</form>
+<div class ="center"><qrcode [qrdata]="currentURL" [width]="256" [errorCorrectionLevel]="'M'"></qrcode> </div>
+  </div>
+  

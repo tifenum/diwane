@@ -40,13 +40,13 @@ this.demandeService.getallForm().subscribe({
 
   navigateToupdateForm(auto: string, id: string) {
     if (auto === "VH0100") {
-      this.router.navigateByUrl(`/updateform1/${id}`);
+      this.router.navigateByUrl(`/see1/${id}`);
     } else if (auto === "VH0200") {
-      this.router.navigateByUrl(`/updateform2/${id}`);
+      this.router.navigateByUrl(`/see2/${id}`);
     } else if (auto === "VH0300") {
-      this.router.navigateByUrl(`/updateform3/${id}`);
+      this.router.navigateByUrl(`/see3/${id}`);
     } else if (auto === "VH0400") {
-      this.router.navigateByUrl(`/updateform4/${id}`);
+      this.router.navigateByUrl(`/see4/${id}`);
     }
   }
 }

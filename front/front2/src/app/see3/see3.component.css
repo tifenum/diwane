@@ -37,3 +37,9 @@
     padding: 5px; /* Ajoute un peu de padding pour mieux visualiser le champ */
     border-radius: 5px; /* Arrondit les bords pour un style plus doux */
   }
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Adjust margin as needed */
+  }

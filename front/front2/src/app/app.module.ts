@@ -55,6 +55,11 @@ import { DemandevalidComponent } from './demandevalid/demandevalid.component';
 import { StatusCheckComponent } from './status-check/status-check.component';
 // import {  ValidatedDemandeComponent } from './validateddemande/validateddemande.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { SeedemandesComponent } from './seedemandes/seedemandes.component';
+import { See1Component } from './see1/see1.component';
+import { See2Component } from './see2/see2.component';
+import { See3Component } from './see3/see3.component';
+import { See4Component } from './see4/see4.component';
 
 
 
@@ -102,6 +107,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     FeedbackComponent,
     DemandevalidComponent,
     StatusCheckComponent,
+    SeedemandesComponent,
+    See1Component,
+    See2Component,
+    See3Component,
+    See4Component,
     // ValidatedDemandeComponent,
     
    
